@@ -30,8 +30,6 @@ DEBUG = os.getenv("debug")
 
 ALLOWED_HOSTS = os.getenv("allowed_hosts").split(',')
 
-config_path=config.json
-
 # Application definition
 
 INSTALLED_APPS = [
