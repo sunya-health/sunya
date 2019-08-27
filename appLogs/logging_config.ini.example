@@ -1,0 +1,21 @@
+[loggers]
+keys=root
+
+[logger_root]
+level=DEBUG
+handlers=file_handler
+
+[formatters]
+keys=formatter
+
+[handlers]
+keys=file_handler
+
+[handler_file_handler]
+class=logging.handlers.TimedRotatingFileHandler
+level=DEBUG
+formatter=formatter
+args=('<log file path>', 'W5', 0, 4)
+
+[formatter_formatter]
+format={"time":"%(asctime)s", "level":"%(levelname)s","file":"%(filename)s","module":"%(module)s","function":"%(funcName)s","lineno":"%(lineno)d","msg":"%(message)s"}
