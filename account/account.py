@@ -9,9 +9,9 @@ from django.views import View
 from security.models import Api_key
 from .models import User
 from .salting_hashing import get_salt, hash_string
-from appLogs.logger import getLoggingInstance
+from appLogs.logger import getLogger
 
-log = getLoggingInstance('/var/log/sunya', "main_log")
+log = getLogger("account")
 
 class LoginView(View):
     def get(self, request):
