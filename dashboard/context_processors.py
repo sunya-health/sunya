@@ -16,7 +16,9 @@ def base_variables_all(request):
 
         permission_user = get_permission(user_own.id)
         data = config_json()
-        clusters = get_clusters(request)
+
+        # clusters = get_clusters(request)
+
         users = ""
         groups = ""
         keys = ""
@@ -26,8 +28,11 @@ def base_variables_all(request):
             groups = data["settings"]["groups"]
         if "keys" in data["settings"]:
             keys = data["settings"]["keys"]
+        # context = {"user_own": user_own, "permission_user": permission_user, "nav_sidebar": data["nav_sidebar"],
+        #            "user_action": users, "group_action": groups, "settings": data["settings"], "key_action": keys, "clusters": clusters}
+
         context = {"user_own": user_own, "permission_user": permission_user, "nav_sidebar": data["nav_sidebar"],
-                   "user_action": users, "group_action": groups, "settings": data["settings"], "key_action": keys, "clusters": clusters}
+                   "user_action": users, "group_action": groups, "settings": data["settings"], "key_action": keys}
 
     return context
 
@@ -53,25 +58,25 @@ def config_json():
 
     return data
 
-
-def get_clusters(request):
-    user_id = request.session['user']
-    clusters = None
-    cursor = None
-    try:
-        cursor = connection.cursor()
-
-        sql_cluster = "select distinct(cluster_name) from monitor_user_cluster_project where user_id=%s" % user_id
-        cursor.execute(sql_cluster)
-        cluster_data = cursor.fetchall()
-
-        clusters = list(map(lambda x: x[0], cluster_data))
-
-        cursor.close()
-        connection.close()
-    except Exception as e:
-        cursor.close()
-        connection.close()
-        print(e)
-
-    return clusters
+#
+# def get_clusters(request):
+#     user_id = request.session['user']
+#     clusters = None
+#     cursor = None
+#     try:
+#         cursor = connection.cursor()
+#
+#         sql_cluster = "select distinct(cluster_name) from monitor_user_cluster_project where user_id=%s" % user_id
+#         cursor.execute(sql_cluster)
+#         cluster_data = cursor.fetchall()
+#
+#         clusters = list(map(lambda x: x[0], cluster_data))
+#
+#         cursor.close()
+#         connection.close()
+#     except Exception as e:
+#         cursor.close()
+#         connection.close()
+#         print(e)
+#
+#     return clusters
