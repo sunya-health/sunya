@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
 
-    <title>{% block title %}Task Scheduler{% endblock %}</title>
+{#    <title>{% block title %}Task Scheduler{% endblock %}</title>#}
     <!-- <link rel="stylesheet" href="{{ STATIC_URL }}account/vendor/bootstrap/css/bootstrap.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -30,7 +30,8 @@
             <div class="header-content clearfix">
                 <div class="header-left clearfix pull-left">
                     <h1 class="pull-left logo-tag">
-                        <a href="{% url 'index' %}"><img src="{{ STATIC_URL }}/base/images/logo.png" alt="Ekbana" height="20"><span>Task Scheduler</span>
+{#                        <a href="{% url 'index' %}"><img src="{{ STATIC_URL }}/base/images/logo.png" alt="Ekbana" height="20"><span>Task Scheduler</span>#}
+                        <a href="{% url 'index' %}"><span>Sunya</span>
                         </a></h1>
                 </div>
                 <div class="header-right clearfix pull-right">
