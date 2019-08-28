@@ -4,6 +4,7 @@ from . import context_processors
 
 from django.views import View
 
+
 class Dashboard(View):
     def get(self, request):
 

@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^account/', include('account.urls')),
     url(r'^security/', include('security.urls')),
-    url(r'^$', dashboard.Dashboard.as_view(), name='index'),
+    url(r'^$', include('dashboard.urls')),
     url(r'^settings/', include('settings.urls')),
 ]
