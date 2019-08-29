@@ -802,6 +802,11 @@ tr:hover{
   border-radius: 10px;
 }
 
+.bg_img {
+    /*background-image: url("../images/health-care.jpg");*/
+    /*background-color: #9fcdff !important;*/
+}
+
 .dropdown-menu li {
   text-transform: capitalize;
 }

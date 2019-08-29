@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
 
-{#    <title>{% block title %}Task Scheduler{% endblock %}</title>#}
+    {#    <title>{% block title %}Task Scheduler{% endblock %}</title>#}
     <!-- <link rel="stylesheet" href="{{ STATIC_URL }}account/vendor/bootstrap/css/bootstrap.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,32 +25,31 @@
 
 {% if user_own %}
     <header class="header-navbar" style="background-color: #008079">
-        <div class="">
-            <div class="header-content clearfix">
-                <div class="header-left clearfix pull-left">
-                    <h1 class="pull-left logo-tag">
-{#                        <a href="{% url 'index' %}"><img src="{{ STATIC_URL }}/base/images/logo2.png" alt="Ekbana" height="20"><span>Task Scheduler</span>#}
-                        <a href="{% url 'index' %}"><span style="width: 40px; height: 25px; font-weight: bold;">SUNYA</span>
-                        </a></h1>
-                </div>
-                <div class="header-right clearfix pull-right">
-                    <ul class="nav nav-pills">
-                        <li role="presentation" class="dropdown header-user">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="" role="button"
-                               aria-haspopup="true" aria-expanded="true"><span
-                                    class="span-name">{{ user_own.username|make_list|first|upper }}</span><i
-                                    class="fa fa-angle-down custom-down" aria-hidden="true"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li class="li-user">
-                                    <p>{{ user_own.username }}</p>
-                                </li>
-                                <li role="separator"></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{% url 'logout' %}">Log Out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+
+        <div class="header-content clearfix">
+            <div class="header-left clearfix pull-left">
+                <h1 class="pull-left logo-tag">
+                    {#                        <a href="{% url 'index' %}"><img src="{{ STATIC_URL }}/base/images/logo2.png" alt="Ekbana" height="20"><span>Task Scheduler</span>#}
+                    <a href="{% url 'index' %}"><span style="width: 40px; height: 25px; font-weight: bold;">SUNYA</span>
+                    </a></h1>
+            </div>
+            <div class="header-right clearfix pull-right">
+                <ul class="nav nav-pills">
+                    <li role="presentation" class="dropdown header-user">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="" role="button"
+                           aria-haspopup="true" aria-expanded="true"><span
+                                class="span-name">{{ user_own.username|make_list|first|upper }}</span><i
+                                class="fa fa-angle-down custom-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="li-user">
+                                <p>{{ user_own.username }}</p>
+                            </li>
+                            <li role="separator"></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'logout' %}">Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -64,15 +63,15 @@
             <ul class="ul-sidebar" id="accordion">
                 {% for v in nav_sidebar %}
                     {% if v.name == "Settings" %}
-                    {% if user_own.is_superuser %}
-                        <li><a href="{% url v.url %}"><i style="margin-top: -3px;">
-                        <img src="{{ v.icon_path }}{{ v.icon_name }}"></i>
-                        <span class="span-link">{{ v.name }}</span></a></li>
-                    {% endif %}
+                        {% if user_own.is_superuser %}
+                            <li><a href="{% url v.url %}"><i style="margin-top: -3px;">
+                                <img src="{{ v.icon_path }}{{ v.icon_name }}"></i>
+                                <span class="span-link">{{ v.name }}</span></a></li>
+                        {% endif %}
                     {% else %}
                         <li><a href="{% url v.url %}"><i style="margin-top: -3px;">
-                        <img src="{{ v.icon_path }}{{ v.icon_name }}"></i>
-                        <span class="span-link">{{ v.name }}</span></a></li>
+                            <img src="{{ v.icon_path }}{{ v.icon_name }}"></i>
+                            <span class="span-link">{{ v.name }}</span></a></li>
                     {% endif %}
 
                 {% endfor %}
@@ -85,7 +84,7 @@
     {% block nav_bar %}
     {% endblock %}
 
-    <div class="page-contents clearfix" xmlns="http://www.w3.org/1999/html">
+    <div class="page-contents clearfix bg_img" xmlns="http://www.w3.org/1999/html">
     <div class="inner-content-fluid">
     <div class="custom-container-fluid">
     <div class="content-display clearfix">

@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block title %}User Dashboard{% endblock %}
+{% load static %}
+
+{% block content %}
+
+    <div class="panel panel-default">
+        <div class="table-responsives">
+            <div id="tbl" class="user_table form-inline">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <table id="user_health" class="table table-striped table-bordered">
+
+                            <tr role="row">
+                                <th style="height: 100px; text-align: left;font-size: 38px">
+                                    SUNYA
+                                </th>
+                            </tr>
+                            <tr role="row">
+                                <td style="text-align: left">
+                                    <span style="font-size: 20px;font-weight: revert">Health Report</span> <br>
+                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">User Info</span>
+                                    <table style="width: 40%; margin-left: 30px">
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">ID</td>
+                                            <td style="text-align: left">Bibek</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Address</td>
+                                            <td style="text-align: left">Maharajgunj</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Contact No.</td>
+                                            <td style="text-align: left">9843882900</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Email</td>
+                                            <td style="text-align: left">bbkchdhry@gmail.com</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Age</td>
+                                            <td style="text-align: left">27</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Gender</td>
+                                            <td style="text-align: left">Male</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr role="row">
+                                <td style="text-align: left">
+                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">Vital Sign</span>
+                                    <table style="width: 25%; margin-left: 30px">
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Weight (kg)</td>
+                                            <td style="text-align: left">72</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Height (Feet)</td>
+                                            <td style="text-align: left">8.10</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Temperature</td>
+                                            <td style="text-align: left">96</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Pulse</td>
+                                            <td style="text-align: left">43</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">BP Systolic</td>
+                                            <td style="text-align: left">47/98</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">BP Diastolic</td>
+                                            <td style="text-align: left">76/99</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Sto2</td>
+                                            <td style="text-align: left">55</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr role="row">
+                                <td style="text-align: left">
+                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">Blood Test</span>
+                                    <table style="width: 25%; margin-left: 30px">
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Glucose</td>
+                                            <td style="text-align: left">887</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Cholesterol</td>
+                                            <td style="text-align: left">77</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Uric Acid</td>
+                                            <td style="text-align: left">120</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr role="row">
+                                <td style="text-align: left">
+                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">Urin Test</span>
+                                    <table style="width: 25%; margin-left: 30px">
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">leukocytes</td>
+                                            <td style="text-align: left">66</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Nitrate</td>
+                                            <td style="text-align: left">6</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Urobilinogen</td>
+                                            <td style="text-align: left">88</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Protein</td>
+                                            <td style="text-align: left">99</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Ph</td>
+                                            <td style="text-align: left">8</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Blood</td>
+                                            <td style="text-align: left">O+</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Sp. Gravity</td>
+                                            <td style="text-align: left">43</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Ketone</td>
+                                            <td style="text-align: left">6</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Bilirubin</td>
+                                            <td style="text-align: left">112</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Glucose</td>
+                                            <td style="text-align: left">480</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Ascorbic acid</td>
+                                            <td style="text-align: left">87</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

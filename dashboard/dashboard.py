@@ -10,9 +10,13 @@ class Dashboard(View):
     def get(self, request):
 
         if 'user' in request.session:
-            is_superuser = User.objects.values_list("is_superuser").filter(id=int(request.session['user']))[0][0]
-            print("is superuser: %s" % is_superuser)
+            user_id = int(request.session['user'])
+            is_superuser = User.objects.get(id=user_id).is_superuser
             context = context_processors.base_variables_all(request)
+
+            if not is_superuser:
+                return render(request, 'dashboard_user.html', context)
+
             return render(request, 'dashboard.html', context)
         else:
             return redirect('login')
