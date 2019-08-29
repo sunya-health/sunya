@@ -63,9 +63,18 @@
         <div class="inner-navbar clearfix">
             <ul class="ul-sidebar" id="accordion">
                 {% for v in nav_sidebar %}
-                    <li><a href="{% url v.url %}"><i style="margin-top: -3px;">
+                    {% if v.name == "Settings" %}
+                    {% if user_own.is_superuser %}
+                        <li><a href="{% url v.url %}"><i style="margin-top: -3px;">
                         <img src="{{ v.icon_path }}{{ v.icon_name }}"></i>
                         <span class="span-link">{{ v.name }}</span></a></li>
+                    {% endif %}
+                    {% else %}
+                        <li><a href="{% url v.url %}"><i style="margin-top: -3px;">
+                        <img src="{{ v.icon_path }}{{ v.icon_name }}"></i>
+                        <span class="span-link">{{ v.name }}</span></a></li>
+                    {% endif %}
+
                 {% endfor %}
             </ul>
             <a class="toggle-button" role="button" title="Toggle sidebar"
@@ -91,7 +100,7 @@
                     <div class="alert alert-danger" role="alert">
                         {{ msg.message | safe }}
                     </div>
-                {% else %}
+                {% else %}index
                     <div class="alert alert-{{ msg.level_tag }}" role="alert">
                         {{ msg.message | safe }}
                     </div>
