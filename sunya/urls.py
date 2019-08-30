@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from dashboard import dashboard
+from sunya import main
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^account/', include('account.urls')),
     url(r'^security/', include('security.urls')),
-    url(r'^', include('dashboard.urls')),
+    url(r'^dashboard/', include('dashboard.urls')),
+    url(r'^$', main.MainPage.as_view(), name='main'),
     url(r'^settings/', include('settings.urls')),
 ]

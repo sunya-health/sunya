@@ -15,9 +15,8 @@ class Dashboard(View):
             context = context_processors.base_variables_all(request)
 
             if not is_superuser:
-                # return render(request, 'dashboard_user.html', context)
-                return render(request, 'health/index.html', context)
+                return render(request, 'dashboard_user.html', context)
 
             return render(request, 'dashboard.html', context)
         else:
-            return redirect('login')
+            return redirect('main')

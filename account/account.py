@@ -82,14 +82,13 @@ class LoginView(View):
 
 class LogoutView(View):
     def get(self, request):
-        print("logout")
         a = list(request.session.keys())
         # user_sess = str(request.session.get('user'))
         for k in a:
             # if k != user_sess:
             del request.session[k]
 
-        return render(request, 'account/logout.html')
+        return redirect('main')
 
 
 class SignUpView(View):
