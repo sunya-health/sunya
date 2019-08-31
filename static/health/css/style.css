@@ -6502,7 +6502,7 @@ button.bg-dark:focus {
 }
 
 .head-font {
-    color: snow !important;
+    color: honeydew !important;
 }
 
 .ml-4,
@@ -8059,7 +8059,7 @@ h1, h2, h3, h4, h5,
   left: 0;
   right: 0;
   z-index: 3;
-  padding-top: 10px; }
+  padding-top: 1px; }
   @media (max-width: 991.98px) {
     .ftco-navbar-light {
       background: #000000 !important;
@@ -8329,7 +8329,7 @@ h1, h2, h3, h4, h5,
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: darkgreen;
+  color: white;
   display: inline-block;
   margin-bottom: 20px;
   font-weight: 600; }
