@@ -35,6 +35,7 @@ ALLOWED_HOSTS = os.getenv("allowed_hosts").split(',')
 INSTALLED_APPS = [
     'account',
     'security',
+    'sunya',
     'settings',
     'django.contrib.admin',
     'django.contrib.auth',
