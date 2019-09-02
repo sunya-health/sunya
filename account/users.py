@@ -17,13 +17,14 @@ class Users_index(View):
         user_list = User.objects.all()
         page = request.GET.get('page', 1)
 
-        paginator = Paginator(user_list, 2)
+        paginator = Paginator(user_list, len(user_list))
         try:
             users = paginator.page(page)
         except PageNotAnInteger:
             users = paginator.page(1)
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
+
         context["users_data"] = users
         return render(request, 'account/users.html', context)
 
@@ -37,18 +38,18 @@ class Users_delete(View):
         elif users_id_list.__contains__(str(request.session['user'])):
             messages.error(request, 'Logged in user cannot be deleted')
         else:
-            username = []
+            username_list = []
             for user_id in users_id_list:
                 user = User.objects.filter(id=user_id)
                 if user:
                     username = user.values_list("username", flat=True)[0]
-                    username.append(username)
+                    username_list.append(username)
                     user.delete()
                     user_group = User_role.objects.filter(user_id=user_id)
                     if user_group:
                         user_group.delete()
 
-            messages.success(request, '%s successfully deleted' % username)
+            messages.success(request, '%s successfully deleted' % username_list)
         data = {
             'success': True
         }

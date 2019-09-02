@@ -1037,6 +1037,15 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
+.btn-action{
+  background-color: #66c2a5;
+  color:#fff;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius:5px;
+}
+
 .custom-panel .panel-heading p {
   font-size: 18px;
   color: #fff;

@@ -13,6 +13,7 @@
 	"vital_sign": {
 		"weight": 67,
 		"height": 5.7,
+		"temperature": 98,
 		"pulse": 40,
 		"bp_systolic": 22,
 		"bp_diastolic": 32,

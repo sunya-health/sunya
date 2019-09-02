@@ -21,31 +21,39 @@
                                 <td style="text-align: left">
                                     <span style="font-size: 20px;font-weight: revert">Health Report</span> <br>
                                     <span style="font-size: 16px;font-weight: revert; color: #cc1111">User Info</span>
-                                    <table style="width: 40%; margin-left: 30px">
-                                        <tr role="row" style="color: #0b2e13">
-                                            <td style="text-align: left">ID</td>
-                                            <td style="text-align: left">Bibek</td>
-                                        </tr>
-                                        <tr role="row" style="color: #0b2e13">
-                                            <td style="text-align: left">Address</td>
-                                            <td style="text-align: left">Maharajgunj</td>
-                                        </tr>
-                                        <tr role="row" style="color: #0b2e13">
-                                            <td style="text-align: left">Contact No.</td>
-                                            <td style="text-align: left">9843882900</td>
-                                        </tr>
-                                        <tr role="row" style="color: #0b2e13">
-                                            <td style="text-align: left">Email</td>
-                                            <td style="text-align: left">bbkchdhry@gmail.com</td>
-                                        </tr>
-                                        <tr role="row" style="color: #0b2e13">
-                                            <td style="text-align: left">Age</td>
-                                            <td style="text-align: left">27</td>
-                                        </tr>
-                                        <tr role="row" style="color: #0b2e13">
-                                            <td style="text-align: left">Gender</td>
-                                            <td style="text-align: left">Male</td>
-                                        </tr>
+                                    <table style="width: 30%; margin-left: 30px">
+                                            <tr role="row" style="color: #0b2e13">
+                                                <td style="text-align: left">ID</td>
+                                                <td style="text-align: left">{{ health_details.user.username }}</td>
+                                            </tr>
+                                            <tr role="row" style="color: #0b2e13">
+                                                <td style="text-align: left">First Name</td>
+                                                <td style="text-align: left">{{ health_details.user.first_name }}</td>
+                                            </tr>
+                                            <tr role="row" style="color: #0b2e13">
+                                                <td style="text-align: left">Last Name</td>
+                                                <td style="text-align: left">{{ health_details.user.last_name }}</td>
+                                            </tr>
+                                            <tr role="row" style="color: #0b2e13">
+                                                <td style="text-align: left">Address</td>
+                                                <td style="text-align: left">{{ health_details.user.address }}</td>
+                                            </tr>
+                                            <tr role="row" style="color: #0b2e13">
+                                                <td style="text-align: left">Contact No.</td>
+                                                <td style="text-align: left">{{ health_details.user.contact_no }}</td>
+                                            </tr>
+                                            <tr role="row" style="color: #0b2e13">
+                                                <td style="text-align: left">Email</td>
+                                                <td style="text-align: left">{{ health_details.user.email }}</td>
+                                            </tr>
+                                            <tr role="row" style="color: #0b2e13">
+                                                <td style="text-align: left">Age</td>
+                                                <td style="text-align: left">{{ health_details.user.age }}</td>
+                                            </tr>
+                                            <tr role="row" style="color: #0b2e13">
+                                                <td style="text-align: left">Gender</td>
+                                                <td style="text-align: left">{{ health_details.user.gender }}</td>
+                                            </tr>
                                     </table>
                                 </td>
                             </tr>
@@ -55,31 +63,31 @@
                                     <table style="width: 25%; margin-left: 30px">
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Weight (kg)</td>
-                                            <td style="text-align: left">72</td>
+                                            <td style="text-align: left">{{ health_details.vital_sign.weight }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Height (Feet)</td>
-                                            <td style="text-align: left">8.10</td>
+                                            <td style="text-align: left">{{ health_details.vital_sign.height }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Temperature</td>
-                                            <td style="text-align: left">96</td>
+                                            <td style="text-align: left">{{ health_details.vital_sign.temperature }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Pulse</td>
-                                            <td style="text-align: left">43</td>
+                                            <td style="text-align: left">{{ health_details.vital_sign.pulse }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">BP Systolic</td>
-                                            <td style="text-align: left">47/98</td>
+                                            <td style="text-align: left">{{ health_details.vital_sign.bp_systolic }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">BP Diastolic</td>
-                                            <td style="text-align: left">76/99</td>
+                                            <td style="text-align: left">{{ health_details.vital_sign.bp_diastolic }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Sto2</td>
-                                            <td style="text-align: left">55</td>
+                                            <td style="text-align: left">{{ health_details.vital_sign.sto2 }}</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -90,66 +98,66 @@
                                     <table style="width: 25%; margin-left: 30px">
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Glucose</td>
-                                            <td style="text-align: left">887</td>
+                                            <td style="text-align: left">{{ health_details.blood_test.glucose }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Cholesterol</td>
-                                            <td style="text-align: left">77</td>
+                                            <td style="text-align: left">{{ health_details.blood_test.cholesterol }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Uric Acid</td>
-                                            <td style="text-align: left">120</td>
+                                            <td style="text-align: left">{{ health_details.blood_test.uric_acid }}</td>
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
                             <tr role="row">
                                 <td style="text-align: left">
-                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">Urin Test</span>
+                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">Urine Test</span>
                                     <table style="width: 25%; margin-left: 30px">
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">leukocytes</td>
-                                            <td style="text-align: left">66</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.leukocytes }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Nitrate</td>
-                                            <td style="text-align: left">6</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.nitrate }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Urobilinogen</td>
-                                            <td style="text-align: left">88</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.urobilinogen }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Protein</td>
-                                            <td style="text-align: left">99</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.protein }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Ph</td>
-                                            <td style="text-align: left">8</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.ph }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Blood</td>
-                                            <td style="text-align: left">O+</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.blood }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Sp. Gravity</td>
-                                            <td style="text-align: left">43</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.sp_gravity }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Ketone</td>
-                                            <td style="text-align: left">6</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.ketone }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Bilirubin</td>
-                                            <td style="text-align: left">112</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.bilirubin }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Glucose</td>
-                                            <td style="text-align: left">480</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.glucose }}</td>
                                         </tr>
                                         <tr role="row" style="color: #0b2e13">
                                             <td style="text-align: left">Ascorbic acid</td>
-                                            <td style="text-align: left">87</td>
+                                            <td style="text-align: left">{{ health_details.urine_test.ascorbic_acid }}</td>
                                         </tr>
                                     </table>
                                 </td>

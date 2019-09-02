@@ -1,9 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-# Create your views here.
-
+from django.shortcuts import render
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics
+
+# Create your views here.
+from sunya.models import Health
+from sunya.serializers import HealthSerializer
 
 
 class MainPage(View):
@@ -11,8 +12,12 @@ class MainPage(View):
         return render(request, 'health/index.html')
 
 
-# @csrf_exempt
-def add(request):
-    print(request.POST)
-    print(request.POST.get('user'))
-    return HttpResponse("status: ok")
+class HealthList(generics.ListCreateAPIView):
+    queryset = Health.objects.all()
+    serializer_class = HealthSerializer
+
+
+class HealthDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Health.objects.all()
+    serializer_class = HealthSerializer
+

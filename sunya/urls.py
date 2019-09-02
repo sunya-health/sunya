@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from dashboard import dashboard
 from sunya import main
 
 urlpatterns = [
@@ -25,6 +24,7 @@ urlpatterns = [
     url(r'^security/', include('security.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^$', main.MainPage.as_view(), name='main'),
-    url(r'^add$', main.add, name='add'),
+    url(r'^sunya/$', main.HealthList.as_view(), name='health_add'),
+    url(r'^sunya/(?P<pk>[0-9]+)/$', main.HealthDetails.as_view(), name='health_get'),
     url(r'^settings/', include('settings.urls')),
 ]
