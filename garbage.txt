@@ -1,0 +1,39 @@
+{
+	"user": {
+		"username": "santosh",
+		"password": "santosh@123",
+		"first_name": "Santosh",
+		"last_name": "Adhikari",
+		"email": "",
+		"address": "",
+		"contact_no": "",
+		"age": 25,
+		"gender": "male"
+	},
+	"vital_sign": {
+		"weight": 67,
+		"height": 5.7,
+		"pulse": 40,
+		"bp_systolic": 22,
+		"bp_diastolic": 32,
+		"sto2": 34
+	},
+	"blood_test": {
+		"glucose": 44,
+		"cholesterol": 88,
+		"uric_acid": 33
+	},
+	"urine_test": {
+		"leukocytes": 88,
+		"nitrate": 55,
+		"urobilinogen": 90,
+		"protein": 23,
+		"ph": 10,
+		"blood": 11,
+		"sp_gravity": 22,
+		"ketone": 34,
+		"bilirubin": 33,
+		"glucose": 334,
+		"ascorbic_acid": 43
+	}
+}

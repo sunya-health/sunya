@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^security/', include('security.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^$', main.MainPage.as_view(), name='main'),
+    url(r'^add$', main.add, name='add'),
     url(r'^settings/', include('settings.urls')),
 ]

@@ -1,3 +1,4 @@
+import django
 from django.shortcuts import render, redirect
 from . import context_processors
 from account.models import User
@@ -10,6 +11,7 @@ class Dashboard(View):
     def get(self, request):
 
         if 'user' in request.session:
+            print(django.middleware.csrf.get_token(request))
             user_id = int(request.session['user'])
             is_superuser = User.objects.get(id=user_id).is_superuser
             context = context_processors.base_variables_all(request)
@@ -20,3 +22,4 @@ class Dashboard(View):
             return render(request, 'dashboard.html', context)
         else:
             return redirect('main')
+
