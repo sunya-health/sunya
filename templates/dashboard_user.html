@@ -10,11 +10,12 @@
                 <div class="row">
                     <div class="col-sm-12">
 
-                        <table id="user_health" class="table table-striped table-bordered">
+                        <input style="float: right" class="form-control" type="text" id="datepicker" placeholder="MM/DD/YYYY">
 
+                        <table id="user_health" class="table table-striped table-bordered">
                             <tr role="row">
-                                <th style="height: 100px; text-align: left;font-size: 38px">
-                                    SUNYA
+                                <th style="height: 100px; text-align: left">
+                                    <span style="font-size: 38px">SUNYA</span>
                                 </th>
                             </tr>
                             <tr role="row">
@@ -22,38 +23,38 @@
                                     <span style="font-size: 20px;font-weight: revert">Health Report</span> <br>
                                     <span style="font-size: 16px;font-weight: revert; color: #cc1111">User Info</span>
                                     <table style="width: 32%; margin-left: 30px">
-                                            <tr role="row" style="color: #0b2e13">
-                                                <td style="text-align: left">ID</td>
-                                                <td style="text-align: left">{{ health_details.user.username }}</td>
-                                            </tr>
-                                            <tr role="row" style="color: #0b2e13">
-                                                <td style="text-align: left">First Name</td>
-                                                <td style="text-align: left">{{ health_details.user.first_name }}</td>
-                                            </tr>
-                                            <tr role="row" style="color: #0b2e13">
-                                                <td style="text-align: left">Last Name</td>
-                                                <td style="text-align: left">{{ health_details.user.last_name }}</td>
-                                            </tr>
-                                            <tr role="row" style="color: #0b2e13">
-                                                <td style="text-align: left">Address</td>
-                                                <td style="text-align: left">{{ health_details.user.address }}</td>
-                                            </tr>
-                                            <tr role="row" style="color: #0b2e13">
-                                                <td style="text-align: left">Contact No.</td>
-                                                <td style="text-align: left">{{ health_details.user.contact_no }}</td>
-                                            </tr>
-                                            <tr role="row" style="color: #0b2e13">
-                                                <td style="text-align: left">Email</td>
-                                                <td style="text-align: left">{{ health_details.user.email }}</td>
-                                            </tr>
-                                            <tr role="row" style="color: #0b2e13">
-                                                <td style="text-align: left">Age</td>
-                                                <td style="text-align: left">{{ health_details.user.age }}</td>
-                                            </tr>
-                                            <tr role="row" style="color: #0b2e13">
-                                                <td style="text-align: left">Gender</td>
-                                                <td style="text-align: left">{{ health_details.user.gender }}</td>
-                                            </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">ID</td>
+                                            <td style="text-align: left">{{ health_details.user.username }}</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">First Name</td>
+                                            <td style="text-align: left">{{ health_details.user.first_name }}</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Last Name</td>
+                                            <td style="text-align: left">{{ health_details.user.last_name }}</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Address</td>
+                                            <td style="text-align: left">{{ health_details.user.address }}</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Contact No.</td>
+                                            <td style="text-align: left">{{ health_details.user.contact_no }}</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Email</td>
+                                            <td style="text-align: left">{{ health_details.user.email }}</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Age</td>
+                                            <td style="text-align: left">{{ health_details.user.age }}</td>
+                                        </tr>
+                                        <tr role="row" style="color: #0b2e13">
+                                            <td style="text-align: left">Gender</td>
+                                            <td style="text-align: left">{{ health_details.user.gender }}</td>
+                                        </tr>
                                     </table>
                                 </td>
                             </tr>
@@ -172,4 +173,15 @@
 {% endblock %}
 
 {% block javascript %}
+
+    <script>
+        $(function() {
+            $("#datepicker").datepicker().on('change', function() {
+                // select on change
+                let date = $("#datepicker").datepicker("getDate");
+                console.log($.datepicker.formatDate("dd-mm-yy", date));
+            });
+        });
+    </script>
+
 {% endblock %}
