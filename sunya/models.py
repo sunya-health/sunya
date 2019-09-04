@@ -34,6 +34,7 @@ class Urine_test(models.Model):
 
 
 class Health(models.Model):
+    device_id = models.CharField(max_length=255, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vital_sign = models.ForeignKey(Vital_sign, on_delete=models.CASCADE, blank=True, null=True)
     blood_test = models.ForeignKey(Blood_test, on_delete=models.CASCADE, blank=True, null=True)
