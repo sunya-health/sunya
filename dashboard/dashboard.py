@@ -41,10 +41,11 @@ def get_health_list(request):
 
 def get_health_details(request, user_id):
     try:
-        health_id = int(Health.objects.get(user=user_id).id)
-        request_url = request.build_absolute_uri(reverse('health_get', args=(health_id, )))
+        health_id = Health.objects.filter(user=user_id).order_by('user_id', '-created_at').distinct('user_id').get().id
 
+        request_url = request.build_absolute_uri(reverse('health_get', args=(health_id, )))
         health_data = requests.get(request_url).json()
         return health_data
-    except Exception:
+    except Exception as e:
+        print(e)
         return None
