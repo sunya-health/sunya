@@ -36,39 +36,6 @@ class Dashboard(View):
 def get_health_list(request):
     request_url = request.build_absolute_uri(reverse('health_add'))
     health_data = requests.get(request_url).json()
-    health_list = []
-
-    # for data in health_data:
-    #     user_details = data['user']
-    #     vital_sign_details = data['vital_sign']
-    #     blood_test_details = data['blood_test']
-    #     urine_test_details = data['urine_test']
-
-        # show_details = "<button type=\"button\" id=\""+user_details['username']+"\" data-toggle=\"modal\" data-target=\"#healthModal\" " \
-        #                                                                         "class=\"btn btn-action\" data-values='{" \
-        #                                                         "\"user\": "+user_details+"" \
-        #                                                         "\"vital_sign\": "+vital_sign_details+"" \
-        #                                                         "\"blood_test\": "+blood_test_details+"" \
-        #                                                         "\"urine_test\": "+urine_test_details+"" \
-        #                                                         "}'>details</button>"
-
-        # show_details = "<button type=\"button\" data-toggle=\"modal\" data-target=\"#healthModal\" " \
-        #                                                                             "class=\"btn btn-action health\" data-values=\"{" \
-        #                                                                             "\"user\": \"test_user\"}\">details</button>"
-        #
-        # print(show_details)
-        # print(show_details.replace("\'", "'"))
-        #
-        # print([str(show_details)])
-
-
-
-        # health_list.append([user_details['username'], user_details['first_name'], user_details['last_name'], user_details['address'],
-        #                     user_details['contact_no'], user_details['email'], user_details['age'], user_details['gender'], show_details])
-
-
-
-
     return health_data
 
 

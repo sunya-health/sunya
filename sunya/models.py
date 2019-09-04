@@ -4,6 +4,7 @@ from account.models import User
 
 
 class Vital_sign(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     weight = models.FloatField(blank=True, null=True)
     height = models.FloatField(blank=True, null=True)
     temperature = models.FloatField(blank=True, null=True)
@@ -14,12 +15,14 @@ class Vital_sign(models.Model):
 
 
 class Blood_test(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     glucose = models.FloatField(blank=True, null=True)
     cholesterol = models.FloatField(blank=True, null=True)
     uric_acid = models.FloatField(blank=True, null=True)
 
 
 class Urine_test(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     leukocytes = models.FloatField(blank=True, null=True)
     nitrate = models.FloatField(blank=True, null=True)
     urobilinogen = models.FloatField(blank=True, null=True)

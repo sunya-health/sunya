@@ -16,31 +16,32 @@ class UserSerializer(serializers.ModelSerializer):
 class VitalSignSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vital_sign
-        fields = '__all__'
+        fields = ['weight', 'height', 'temperature', 'pulse', 'bp_systolic', 'bp_diastolic', 'sto2']
 
 
 class BloodTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blood_test
-        fields = '__all__'
+        fields = ['glucose', 'cholesterol', 'uric_acid']
 
 
-class UrinTestSerializer(serializers.ModelSerializer):
+class UrineTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Urine_test
-        fields = '__all__'
+        fields = ['leukocytes', 'nitrate', 'urobilinogen', 'protein', 'ph', 'blood', 'sp_gravity', 'ketone', 'bilirubin', 'glucose', 'ascorbic_acid']
 
 
 class HealthSerializer(serializers.ModelSerializer):
+    print("test serializer")
     user = UserSerializer()
-    vital_sign = VitalSignSerializer()
-    blood_test = BloodTestSerializer()
-    urine_test = UrinTestSerializer()
+    vital_sign = VitalSignSerializer(required=False)
+    blood_test = BloodTestSerializer(required=False)
+    urine_test = UrineTestSerializer(required=False)
     created_at = serializers.DateTimeField(default=datetime.datetime.now())
 
     class Meta:
         model = Health
-        fields = ['id', 'user', 'vital_sign', 'blood_test', 'urine_test', 'created_at']
+        fields = ['id', 'device_id', 'user', 'vital_sign', 'blood_test', 'urine_test', 'created_at']
 
     def create(self, validated_data):
         user_details = validated_data.pop('user')
@@ -48,22 +49,27 @@ class HealthSerializer(serializers.ModelSerializer):
         blood_test_details = validated_data.pop('blood_test')
         urine_test_details = validated_data.pop('urine_test')
         created_at = validated_data.pop('created_at')
+        device_id = validated_data.pop('device_id')
 
         # creating a hashed password
         user_password = user_details.pop('password')
         salt = get_salt()
         hashed_password = hash_string(salt, user_password)
 
-        user = User(salt=salt, hashed_password=hashed_password, **user_details)
-        vital_sign = Vital_sign.objects.create(**vital_sign_details)
-        blood_test = Blood_test.objects.create(**blood_test_details)
-        urine_test = Urine_test.objects.create(**urine_test_details)
+        print("\n*********************Test***********************\n")
 
+        user = User(salt=salt, hashed_password=hashed_password, **user_details)
         user.save()
+
+        vital_sign = Vital_sign(user=user, **vital_sign_details)
+        blood_test = Blood_test(user=user, **blood_test_details)
+        urine_test = Urine_test(user=user, **urine_test_details)
+
         vital_sign.save()
         blood_test.save()
         urine_test.save()
 
-        health = Health.objects.create(user=user, vital_sign=vital_sign, blood_test=blood_test, urine_test=urine_test, created_at=created_at)
+        health = Health.objects.create(user=user, vital_sign=vital_sign, blood_test=blood_test, urine_test=urine_test,
+                                       created_at=created_at, device_id=device_id)
 
         return health
