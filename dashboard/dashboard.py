@@ -31,12 +31,12 @@ class Dashboard(View):
                 # health_data = get_health_details(request, user_id)
                 # context['health_details'] = health_data
 
-                return render(request, 'dashboard_org.html', context)
+                return render(request, 'health/dashboard_org.html', context)
 
             org_user_details = get_organization_user_details()
             context['org_user'] = org_user_details
 
-            return render(request, 'dashboard.html', context)
+            return render(request, 'health/dashboard.html', context)
         else:
             return redirect('main')
 

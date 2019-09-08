@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}/health/css/flaticon.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}/health/css/icomoon.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}/health/css/style.css">
+
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -62,6 +63,7 @@
                 <li class="nav-item"><a href="#department-section" class="nav-link"><span>Department</span></a></li>
                 <li class="nav-item"><a href="#blog-section" class="nav-link"><span>Blog</span></a></li>
                 <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
+                <li class="nav-item"><a href="{% url 'client_report' %}" class="nav-link"><span>Report</span></a></li>
             </ul>
         </div>
     </div>
@@ -560,8 +562,11 @@
 <script src="{{ STATIC_URL }}/health/js/scrollax.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="{{ STATIC_URL }}/health/js/google-map.js"></script>
-
 <script src="{{ STATIC_URL }}/health/js/main.js"></script>
+
+<link rel="stylesheet" href="{{ STATIC_URL }}base/datatable/dataTables.bootstrap.min.css">
+<script type="text/javascript" src="{{ STATIC_URL }}base/datatable/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}base/datatable/dataTables.bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 import datetime
 
-import requests
 from django.contrib import messages
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from rest_framework import generics, status
@@ -11,14 +11,36 @@ from rest_framework.response import Response
 from account.models import User
 from account.salting_hashing import get_salt, hash_string
 from dashboard import context_processors
+from dashboard.dashboard import get_health_details
 from sunya.models import Health, Vital_sign, Blood_test, Urine_test, Organization, Organization_user, Clients
-from sunya.serializers import HealthSerializer, UserSerializer, VitalSignSerializer, BloodTestSerializer, \
+from sunya.serializers import HealthSerializer, VitalSignSerializer, BloodTestSerializer, \
     UrineTestSerializer, ClientSerializer
 
 
 class MainPage(View):
     def get(self, request):
         return render(request, 'health/index.html')
+
+
+class ClientReports(View):
+    def get(self, request):
+        return render(request, 'health/blog-single.html')
+
+    def post(self, request):
+        user_id = request.POST.get('user_id')
+        print(user_id)
+
+        # return render(request, 'health/blog-single.html')
+        data = {
+            'success': 1
+        }
+        return JsonResponse(data)
+
+        # user_id = int(request.session['user'])
+        # health_data = get_health_details(request, user_id)
+        #
+        # context['health_details'] = health_data
+
 
 
 class OrganizationDetails(View):

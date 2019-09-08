@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^$', main.MainPage.as_view(), name='main'),
     url(r'^sunya/$', main.HealthList.as_view(), name='health_add'),
     url(r'^sunya/(?P<pk>[0-9]+)/$', main.HealthDetails.as_view(), name='health_get'),
+    url(r'^sunya/report/$', main.ClientReports.as_view(), name='client_report'),
     url(r'^sunya/organization/$', main.OrganizationDetails.as_view(), name='organization'),
     url(r'^sunya/organization/user/$', main.AssignOrCreateUser.as_view(), name='assign_user'),
     url(r'^settings/', include('settings.urls')),
