@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+{% block title %}DashBoard{% endblock %}
+{% load static %}
+
+{% block content %}
+
+    <div class="panel panel-default">
+        <div class="table-responsives">
+            <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <button type="button" style="float: right" class="btn btn-action add_org" data-toggle="modal" data-target="#addModal">Add Device</button>
+
+
+                        <table id="dt-orgList" class="table table-striped dataTable"
+                               style="width: 100%;" role="grid" aria-describedby="example_info">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Device ID
+                                </th>
+                                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Name
+                                </th>
+                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-label="Position: activate to sort column ascending">
+                                    Address
+                                </th>
+                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-label="Position: activate to sort column ascending">
+                                    Manage
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for data in organization %}
+                                <tr>
+                                    <td class="device_id">{{ data.device_id }}</td>
+                                    <td class="name">{{ data.name }}</td>
+                                    <td class="address">{{ data.address }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-action assign_user" data-toggle="modal"
+                                                data-target="#assignUserModal"
+                                                data-values='{"device_id": "{{ data.device_id }}"}'>Assign User</button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <td class="users" hidden>{{ users }}</td>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">Device ID</th>
+                                <th rowspan="1" colspan="1">Name</th>
+                                <th rowspan="1" colspan="1">Address</th>
+                                <th rowspan="1" colspan="1">Manage</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Job Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">Add Organization</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/sunya/organization/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="device_id">Device ID</label>
+                                <input name="device_id" class="form-control" type="text" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input name="name" class="form-control" type="text" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input name="address" class="form-control" type="text" required="required">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Assign User -->
+        <div class="modal fade" id="assignUserModal" tabindex="-1" role="dialog" aria-labelledby="assignUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">Assign User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/sunya/organization/user/" method="post">
+                            {% csrf_token %}
+                            <span style="font-size: 20px">Select existing user</span>
+                            <div class="form-group" id="users_select">
+                                <label>Users</label>
+                                <select class="custom-select mr-sm-2" name="users"></select>
+                            </div>
+                            <span style="font-size: 20px">Create new user</span>
+                            <div class="form-group">
+                                <input id="username" placeholder="Username" name="username" class="form-control" type="text" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input id="password" placeholder="Password" name="password" class="form-control" type="password" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input id="f_name" placeholder="First Name" name="f_name" class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <input id="l_name" placeholder="Last Name" name="l_name" class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <input id="email" placeholder="Email" name="email" class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <input id="address" placeholder="Address" name="address" class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <input id="contact" placeholder="Contact Number" name="contact" class="form-control" type="number">
+                            </div>
+                            <div class="form-group">
+                                <input id="age" placeholder="Age" name="age" class="form-control" type="number">
+                            </div>
+                            <div class="form-group" id="gender">
+                                <label>Gender</label>
+                                <select id="gender_select" class="custom-select mr-sm-2" name="gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="display: none;">
+                                <input id="device_id" name="device_id" class="form-control" type="text">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+    <script>
+        $('.assign_user').on('click', function () {
+            // Getting Select option values
+
+            var values = $(this).data('values');
+            $('#device_id').val(values.device_id);
+
+            regex = /'/gi;
+
+            var users = $('#dt-orgList').find('.users').text();
+            users = JSON.parse(users.replace(regex, '"'));
+
+            var content = '<option selected hidden value="None">Choose</option>' ;
+            for(var i=0; i<users.length; i++){
+                content += '<option value="' + users[i].id + '">' + users[i].username + '</option>'
+            }
+            content += '<option>None</option>' ;
+
+            $("#users_select select").html(content);
+
+            $(function () {
+                $("#users_select select").change(function () {
+                    var selectedText = $(this).find("option:selected").text();
+                    var selectedValue = $(this).val();
+                    {#alert("Selected Text: " + selectedText + " Value: " + selectedValue);#}
+                    if (selectedText === 'None'){
+                        $("#username").removeAttr('disabled');
+                        $("#password").removeAttr('disabled');
+                        $("#f_name").removeAttr('disabled');
+                        $("#l_name").removeAttr('disabled');
+                        $("#email").removeAttr('disabled');
+                        $("#address").removeAttr('disabled');
+                        $("#contact").removeAttr('disabled');
+                        $("#gender_select").removeAttr('disabled');
+                        $("#age").removeAttr('disabled');
+                    }else{
+                        $("#username").attr('disabled', 'disabled');
+                        $("#password").attr('disabled', 'disabled');
+                        $("#f_name").attr('disabled', 'disabled');
+                        $("#l_name").attr('disabled', 'disabled');
+                        $("#email").attr('disabled', 'disabled');
+                        $("#address").attr('disabled', 'disabled');
+                        $("#contact").attr('disabled', 'disabled');
+                        $("#gender_select").attr('disabled', 'disabled');
+                        $("#age").attr('disabled', 'disabled');
+                    }
+                });
+            });
+
+        });
+
+
+    </script>
+
+{% endblock %}

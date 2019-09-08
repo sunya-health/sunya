@@ -15,6 +15,7 @@ class User(models.Model):
     age = models.IntegerField(blank=True, null=True)
     gender = models.CharField(max_length=6, blank=True, null=True)
     is_superuser = models.BooleanField(default=False)
+    is_orguser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
 

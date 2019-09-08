@@ -7,6 +7,12 @@
       "url": "index"
     },
     {
+      "name": "Bags",
+      "icon_path": "/static/base/images/",
+      "icon_name": "bags.png",
+      "url": "organization"
+    },
+    {
       "name": "Settings",
       "icon_path": "/static/base/images/",
       "icon_name": "settings.png",

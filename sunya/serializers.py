@@ -11,6 +11,13 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['username', 'password', 'first_name', 'last_name', 'email', 'address', 'contact_no', 'age', 'gender']
 
 
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clients
+        fields = ['user_id', 'device', 'first_name', 'last_name', 'email', 'address', 'contact_no', 'age', 'gender']
+
+
+
 class VitalSignSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vital_sign
@@ -30,7 +37,8 @@ class UrineTestSerializer(serializers.ModelSerializer):
 
 
 class HealthSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    # user = UserSerializer()
+    user = ClientSerializer()
     vital_sign = VitalSignSerializer(required=False)
     blood_test = BloodTestSerializer(required=False)
     urine_test = UrineTestSerializer(required=False)
@@ -38,6 +46,8 @@ class HealthSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Health
-        fields = ['id', 'device_id', 'user', 'vital_sign', 'blood_test', 'urine_test', 'created_at']
+        fields = ['id', 'user', 'vital_sign', 'blood_test', 'urine_test', 'created_at']
+
+
 
 

@@ -17,7 +17,12 @@
                                 <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
                                     aria-sort="ascending"
                                     aria-label="Name: activate to sort column descending">
-                                    ID
+                                    Device ID
+                                </th>
+                                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Username
                                 </th>
                                 <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
                                     aria-sort="ascending"
@@ -35,7 +40,7 @@
                                 </th>
                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
                                     aria-label="Position: activate to sort column ascending">
-                                    Contact Number
+                                    Contact No.
                                 </th>
                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
                                     aria-label="Position: activate to sort column ascending">
@@ -49,36 +54,27 @@
                                     aria-label="Position: activate to sort column ascending">
                                     Gender
                                 </th>
-                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
-                                    aria-label="Position: activate to sort column ascending">
-                                    Health
-                                </th>
                             </tr>
                             </thead>
                             <tbody>
-                            {% for data in health_data %}
+                            {% for data in org_user %}
                                 <tr>
-                                    <td class="username">{{ data.user.username }}</td>
-                                    <td class="first_name">{{ data.user.first_name }}</td>
-                                    <td class="last_name">{{ data.user.last_name }}</td>
-                                    <td class="address">{{ data.user.address }}</td>
-                                    <td class="contact_no">{{ data.user.contact_no }}</td>
-                                    <td class="email">{{ data.user.email }}</td>
-                                    <td class="age">{{ data.user.age }}</td>
-                                    <td class="gender">{{ data.user.gender }}</td>
-                                    <td>
-                                        <button type="button" data-toggle="modal" data-target="#healthModal" class="btn btn-action health"
-                                                data-values='{"user": "{{ data.user }}",
-                                            "vital_sign": "{{ data.vital_sign }}",
-                                            "blood_test": "{{ data.blood_test }}",
-                                            "urine_test": "{{ data.urine_test }}"}'>details</button>
-                                    </td>
+                                    <td class="username">{{ data.device_id }}</td>
+                                    <td class="username">{{ data.username }}</td>
+                                    <td class="first_name">{{ data.first_name }}</td>
+                                    <td class="last_name">{{ data.last_name }}</td>
+                                    <td class="address">{{ data.address }}</td>
+                                    <td class="contact_no">{{ data.contact_no }}</td>
+                                    <td class="email">{{ data.email }}</td>
+                                    <td class="age">{{ data.age }}</td>
+                                    <td class="gender">{{ data.gender }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th rowspan="1" colspan="1">ID</th>
+                                <th rowspan="1" colspan="1">Device ID</th>
+                                <th rowspan="1" colspan="1">Username</th>
                                 <th rowspan="1" colspan="1">First Name</th>
                                 <th rowspan="1" colspan="1">Last Name</th>
                                 <th rowspan="1" colspan="1">Address</th>
@@ -86,7 +82,6 @@
                                 <th rowspan="1" colspan="1">Email</th>
                                 <th rowspan="1" colspan="1">Age</th>
                                 <th rowspan="1" colspan="1">Gender</th>
-                                <th rowspan="1" colspan="1">Health</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -96,249 +91,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="healthModal" tabindex="-1" role="dialog" aria-labelledby="healthModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Sunya Health Report</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="panel panel-default">
-                        <div class="table-responsives">
-                            <div id="tbl" class="user_table form-inline">
-                                <div class="row">
-                                    <div class="col-sm-12">
-
-                                        <input style="float: right" class="form-control" type="text" id="datepicker" placeholder="MM/DD/YYYY">
-
-                                        <table id="user_health" class="table table-striped table-bordered">
-
-                                            <tr role="row">
-                                                <th style="height: 100px; text-align: left;font-size: 38px">
-                                                    SUNYA
-                                                </th>
-                                            </tr>
-                                            <tr role="row">
-                                                <td style="text-align: left">
-                                                    <span style="font-size: 20px;font-weight: revert">Health Report</span> <br>
-                                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">User Info</span>
-                                                    <table class="d-user-info">
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">ID</td>
-                                                            <td style="text-align: left" id="username">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">First Name</td>
-                                                            <td style="text-align: left" id="first_name">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Last Name</td>
-                                                            <td style="text-align: left" id="last_name">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Address</td>
-                                                            <td style="text-align: left" id="address">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Contact No.</td>
-                                                            <td style="text-align: left" id="contact_no">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Email</td>
-                                                            <td style="text-align: left" id="email">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Age</td>
-                                                            <td style="text-align: left" id="age">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Gender</td>
-                                                            <td style="text-align: left" id="gender">
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td style="text-align: left">
-                                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">Vital Sign</span>
-                                                    <table class="d-health-info">
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Weight (kg)</td>
-                                                            <td style="text-align: left" id="weight">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Height (Feet)</td>
-                                                            <td style="text-align: left" id="height">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Temperature</td>
-                                                            <td style="text-align: left" id="temperature">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Pulse</td>
-                                                            <td style="text-align: left" id="pulse">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">BP Systolic</td>
-                                                            <td style="text-align: left" id="bp_systolic">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">BP Diastolic</td>
-                                                            <td style="text-align: left" id="bp_diastolic">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Sto2</td>
-                                                            <td style="text-align: left" id="sto2">
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td style="text-align: left">
-                                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">Blood Test</span>
-                                                    <table class="d-health-info">
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Glucose</td>
-                                                            <td style="text-align: left" id="b_glucose">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Cholesterol</td>
-                                                            <td style="text-align: left" id="cholesterol">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Uric Acid</td>
-                                                            <td style="text-align: left" id="uric_acid">
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td style="text-align: left">
-                                                    <span style="font-size: 16px;font-weight: revert; color: #cc1111">Urine Test</span>
-                                                    <table class="d-health-info">
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Leukocytes</td>
-                                                            <td style="text-align: left" id="leukocytes">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Nitrate</td>
-                                                            <td style="text-align: left" id="nitrate">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Urobilinogen</td>
-                                                            <td style="text-align: left" id="urobilinogen">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Protein</td>
-                                                            <td style="text-align: left" id="protein">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Ph</td>
-                                                            <td style="text-align: left" id="ph">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Blood</td>
-                                                            <td style="text-align: left" id="blood">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Sp. Gravity</td>
-                                                            <td style="text-align: left" id="sp_gravity">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Ketone</td>
-                                                            <td style="text-align: left" id="ketone">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Bilirubin</td>
-                                                            <td style="text-align: left" id="bilirubin">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Glucose</td>
-                                                            <td style="text-align: left" id="u_glucose">
-                                                        </tr>
-                                                        <tr role="row" style="color: #0b2e13">
-                                                            <td style="text-align: left">Ascorbic acid</td>
-                                                            <td style="text-align: left" id="ascorbic_acid">
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
 {% endblock %}
 
 {% block javascript %}
-
-    <script>
-        $('.health').on('click', function () {
-            let values = $(this).data('values');
-            regex = /'/gi;
-            user_details = JSON.parse(values.user.replace(regex, '"'));
-            vital_sign_details = JSON.parse(values.vital_sign.replace(regex, '"'));
-            blood_test_details = JSON.parse(values.blood_test.replace(regex, '"'));
-            urine_test_details = JSON.parse(values.urine_test.replace(regex, '"'));
-
-            // populating user details
-            document.getElementById('username').innerHTML=user_details.username;
-            document.getElementById('first_name').innerHTML=user_details.first_name;
-            document.getElementById('last_name').innerHTML=user_details.last_name;
-            document.getElementById('address').innerHTML=user_details.address;
-            document.getElementById('contact_no').innerHTML=user_details.contact_no;
-            document.getElementById('email').innerHTML=user_details.email;
-            document.getElementById('age').innerHTML=user_details.age;
-            document.getElementById('gender').innerHTML=user_details.gender;
-
-            // populating vital sign details
-            document.getElementById('weight').innerHTML=vital_sign_details.weight;
-            document.getElementById('height').innerHTML=vital_sign_details.height;
-            document.getElementById('temperature').innerHTML=vital_sign_details.temperature;
-            document.getElementById('pulse').innerHTML=vital_sign_details.pulse;
-            document.getElementById('bp_systolic').innerHTML=vital_sign_details.bp_systolic;
-            document.getElementById('bp_diastolic').innerHTML=vital_sign_details.bp_diastolic;
-            document.getElementById('sto2').innerHTML=vital_sign_details.sto2;
-
-            // populating blood test details
-            document.getElementById('b_glucose').innerHTML=blood_test_details.glucose;
-            document.getElementById('cholesterol').innerHTML=blood_test_details.cholesterol;
-            document.getElementById('uric_acid').innerHTML=blood_test_details.uric_acid;
-
-            // populating urine test details
-            document.getElementById('leukocytes').innerHTML=urine_test_details.leukocytes;
-            document.getElementById('nitrate').innerHTML=urine_test_details.nitrate;
-            document.getElementById('urobilinogen').innerHTML=urine_test_details.urobilinogen;
-            document.getElementById('protein').innerHTML=urine_test_details.protein;
-            document.getElementById('ph').innerHTML=urine_test_details.ph;
-            document.getElementById('blood').innerHTML=urine_test_details.blood;
-            document.getElementById('sp_gravity').innerHTML=urine_test_details.sp_gravity;
-            document.getElementById('ketone').innerHTML=urine_test_details.ketone;
-            document.getElementById('bilirubin').innerHTML=urine_test_details.bilirubin;
-            document.getElementById('u_glucose').innerHTML=urine_test_details.glucose;
-            document.getElementById('ascorbic_acid').innerHTML=urine_test_details.ascorbic_acid;
-        })
-    </script>
-
-        <script>
-        $(function() {
-            $("#datepicker").datepicker().on('change', function() {
-                // select on change
-                let date = $("#datepicker").datepicker("getDate");
-                console.log($.datepicker.formatDate("dd-mm-yy", date));
-            });
-        });
-    </script>
 
 {% endblock %}
