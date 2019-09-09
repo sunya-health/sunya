@@ -80,7 +80,7 @@ def get_organization_user_details():
     organization_user_details = Organization_user.objects.values()
     organization_user_list = []
     for organization_user in organization_user_details:
-        device_id = Organization.objects.get(id=organization_user['device_id']).device_id
+        device_id = organization_user['device_id']
         user = User.objects.filter(id=organization_user['user_id']).values()[0]
         user['device_id'] = device_id
         organization_user_list.append(user)
