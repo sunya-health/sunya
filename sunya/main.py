@@ -27,10 +27,13 @@ class ClientReports(View):
         return render(request, 'health/blog-single.html')
 
     def post(self, request):
-        user_id = request.POST.get('user_id')
-        print(user_id)
+        user_id = request.POST.get('userID')
+        dob = request.POST.get('dob')
+        report_date = request.POST.get('reportDate')
+        print("user_id: " + user_id)
+        print("dob: " + dob)
+        print("report_date: " + report_date)
 
-        # return render(request, 'health/blog-single.html')
         data = {
             'success': 1
         }

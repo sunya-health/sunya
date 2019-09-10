@@ -95,4 +95,35 @@
 
 {% block javascript %}
 
+
+     $(document).ready(function(){
+        $("#clientDetailsForm").submit(function(evt){
+            evt.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{% url 'client_report' %}",
+                data : {
+                    'user_id': 'bibek',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(data){
+                    if(data.success){
+                        console.log("success");
+                        $('#healthModal').modal('show');
+                        document.getElementById("clientDetailsForm").reset();
+                        $('#clientDetails').modal('hide');
+
+                    }else{
+                        console.log("not success")
+                    }
+                },
+                error: function(xhr, desc, err){
+                    console.log(err);
+                }
+            });
+        });
+    });
+
 {% endblock %}
