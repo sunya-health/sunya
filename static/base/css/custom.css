@@ -763,8 +763,8 @@ tr:hover{
 }
 
 .btn-primary {
-  background-color: #90C861;
-  border-color: #90C861;
+  background-color: #008079;
+  border-color: #008079;
 }
 
 .btn {
@@ -776,8 +776,8 @@ tr:hover{
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: #80b752 !important;
-  border-color: #80b752 !important;
+  background-color: #008079 !important;
+  border-color: #008079 !important;
 }
 
 .pagination>.active>a, 
@@ -786,8 +786,8 @@ tr:hover{
 .pagination>.active>span, 
 .pagination>.active>span:focus, 
 .pagination>.active>span:hover {
-    background-color: #90C861;
-    border-color: #90C861;
+    background-color: #008079;
+    border-color: #008079;
 }
 
 .panel {

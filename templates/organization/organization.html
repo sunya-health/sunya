@@ -8,11 +8,9 @@
         <div class="table-responsives">
             <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
+                    <button type="button" style="float: right; margin-bottom: 10px" class="btn btn-action add_org" data-toggle="modal" data-target="#addModal">Add Device</button>
+
                     <div class="col-sm-12">
-
-                        <button type="button" style="float: right" class="btn btn-action add_org" data-toggle="modal" data-target="#addModal">Add Device</button>
-
-
                         <table id="dt-orgList" class="table table-striped dataTable"
                                style="width: 100%;" role="grid" aria-describedby="example_info">
                             <thead>
@@ -50,7 +48,6 @@
                                     </td>
                                 </tr>
                             {% endfor %}
-                            <td class="users" hidden>{{ users }}</td>
                             </tbody>
                             <tfoot>
                             <tr>
@@ -172,6 +169,15 @@
 {% block javascript %}
 
     <script>
+        $(document).ready( function () {
+            $('#dt-orgList').DataTable( {
+                "bFilter": true
+            } );
+        } );
+
+    </script>
+
+    <script>
         $('.assign_user').on('click', function () {
             // Getting Select option values
 
@@ -219,10 +225,7 @@
                     }
                 });
             });
-
         });
-
-
     </script>
 
 {% endblock %}

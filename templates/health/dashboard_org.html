@@ -337,7 +337,7 @@
         })
     </script>
 
-        <script>
+    <script>
         $(function() {
             $("#datepicker").datepicker().on('change', function() {
                 // select on change
@@ -345,6 +345,12 @@
                 console.log($.datepicker.formatDate("dd-mm-yy", date));
             });
         });
+
+        $(document).ready( function () {
+            $('#dt-healthList').DataTable( {
+                "bFilter": true
+            } );
+        } );
     </script>
 
 {% endblock %}
