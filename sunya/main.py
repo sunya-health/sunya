@@ -24,25 +24,24 @@ class MainPage(View):
 
 class ClientReports(View):
     def get(self, request):
-        return render(request, 'health/blog-single.html')
+        return render(request, 'health/health_report.html')
 
     def post(self, request):
         user_id = request.POST.get('userID')
         dob = request.POST.get('dob')
-        report_date = request.POST.get('reportDate')
         print("user_id: " + user_id)
         print("dob: " + dob)
-        print("report_date: " + report_date)
 
-        data = {
-            'success': 1
-        }
-        return JsonResponse(data)
+        # data = {
+        #     'success': 1
+        # }
+        # return JsonResponse(data)
 
         # user_id = int(request.session['user'])
         # health_data = get_health_details(request, user_id)
         #
         # context['health_details'] = health_data
+        return render(request, 'health/health_report.html')
 
 
 

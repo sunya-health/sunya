@@ -1,0 +1,102 @@
+{% extends 'health/health_base.html' %}
+{% block title %}Health Report Page{% endblock %}
+{% load static %}
+
+{% block content %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img style="height: 65px; width: 110px" src="{{ STATIC_URL }}/health/images/sunya_logo.png" alt="Sunya">
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ STATIC_URL }}/health/images/health_report_1.jpg');" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-end justify-content-start">
+                <div class="col-md-9 ftco-animate pb-4">
+                    <h1 class="mb-3">User Report</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>user report <i class="ion-ios-arrow-forward"></i></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel panel-default">
+        <div class="row justify-content-center table-responsives">
+            <div id="tbl" class="col-md-12 dataTables_wrapper dt-bootstrap">
+                <div class="row">
+                    <div class="col-sm-12 report_table">
+                        <table id="dt-orgList" class="table table-bordered table-striped"
+                               style="font-size: 12px; width: 100%; margin-top: 45px; margin-bottom: 45px" role="grid" aria-describedby="example_info">
+                            <tr>
+                                <th>Date</th>
+                                <th colspan="7">Vital Sign</th>
+                                <th colspan="3">Blood Test</th>
+                                <th colspan="11">Urine Test</th>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">Jan</th>
+                                <th>Weight</th>
+                                <th>Height</th>
+                                <th>Temperature</th>
+                                <th>Pulse</th>
+                                <th>Bp_systolic</th>
+                                <th>Bp_diastolic</th>
+                                <th>Sto2</th>
+
+                                <th>Glucose</th>
+                                <th>Cholestrol</th>
+                                <th>Uric Acid</th>
+
+                                <th>Leukocytes</th>
+                                <th>Nitrate</th>
+                                <th>Urobilinogen</th>
+                                <th>Protein</th>
+                                <th>PH</th>
+                                <th>Blood</th>
+                                <th>Sp_gravity</th>
+                                <th>Ketone</th>
+                                <th>Blirubin</th>
+                                <th>Glucose</th>
+                                <th>Ascorbic_acid</th>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}
