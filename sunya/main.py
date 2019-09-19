@@ -32,17 +32,8 @@ class ClientReports(View):
         print("user_id: " + user_id)
         print("dob: " + dob)
 
-        # data = {
-        #     'success': 1
-        # }
-        # return JsonResponse(data)
-
-        # user_id = int(request.session['user'])
-        # health_data = get_health_details(request, user_id)
-        #
-        # context['health_details'] = health_data
-        return render(request, 'health/health_report.html')
-
+        health_data = get_health_details(request, user_id)
+        return render(request, 'health/health_report.html', {'health_details': health_data})
 
 
 class OrganizationDetails(View):

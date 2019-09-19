@@ -29,180 +29,157 @@
             <div id="tbl" class="col-md-12 dataTables_wrapper dt-bootstrap">
                 <div class="row">
                     <div class="col-sm-12 report_table">
-                        <table id="dt-orgList" class="table table-bordered table-striped"
-                               style="font-size: 12px; width: 100%; margin-top: 45px; margin-bottom: 45px" role="grid" aria-describedby="example_info">
 
-                            <tr style="text-align: center">
-                                <th rowspan="6" style="vertical-align: middle">Jan</th>
-                                <th rowspan="2" style="vertical-align: middle">Vital Sign</th>
-                                <th>Weight</th>
-                                <th>Height</th>
-                                <th>Temperature</th>
-                                <th>Pulse</th>
-                                <th>Bp_systolic</th>
-                                <th>Bp_diastolic</th>
-                                <th>Sto2</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                        <table id="dt-userdetails" class="table table-striped"
+                               style="font-size: 12px; width: 100%; margin-top: 45px; margin-bottom: 45px" role="grid"
+                               aria-describedby="example_info">
+                            <thead>
+                            <tr role="row"  style="text-align: center">
+                                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    User ID
+                                </th>
+                                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    First Name
+                                </th>
+                                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Last Name
+                                </th>
+                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-label="Position: activate to sort column ascending">
+                                    Address
+                                </th>
+                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-label="Position: activate to sort column ascending">
+                                    Contact Number
+                                </th>
+                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-label="Position: activate to sort column ascending">
+                                    Email
+                                </th>
+                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-label="Position: activate to sort column ascending">
+                                    Age
+                                </th>
+                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-label="Position: activate to sort column ascending">
+                                    Gender
+                                </th>
                             </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2" style="vertical-align: middle">Blood Test</th>
-                                <th>Glucose</th>
-                                <th>Cholestrol</th>
-                                <th>Uric Acid</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2" style="vertical-align: middle;text-align: center;">Urine Test</th>
-                                <th>Leukocytes</th>
-                                <th>Nitrate</th>
-                                <th>Urobilinogen</th>
-                                <th>Protein</th>
-                                <th>PH</th>
-                                <th>Blood</th>
-                                <th>Sp_gravity</th>
-                                <th>Ketone</th>
-                                <th>Blirubin</th>
-                                <th>Glucose</th>
-                                <th>Ascorbic_acid</th>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            {###################################################################################################}
-
-
-                            <tr style="text-align: center">
-                                <th rowspan="6" style="vertical-align: middle">Feb</th>
-                                <th rowspan="2" style="vertical-align: middle">Vital Sign</th>
-                                <th>Weight</th>
-                                <th>Height</th>
-                                <th>Temperature</th>
-                                <th>Pulse</th>
-                                <th>Bp_systolic</th>
-                                <th>Bp_diastolic</th>
-                                <th>Sto2</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2" style="vertical-align: middle">Blood Test</th>
-                                <th>Glucose</th>
-                                <th>Cholestrol</th>
-                                <th>Uric Acid</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2" style="vertical-align: middle;text-align: center;">Urine Test</th>
-                                <th>Leukocytes</th>
-                                <th>Nitrate</th>
-                                <th>Urobilinogen</th>
-                                <th>Protein</th>
-                                <th>PH</th>
-                                <th>Blood</th>
-                                <th>Sp_gravity</th>
-                                <th>Ketone</th>
-                                <th>Blirubin</th>
-                                <th>Glucose</th>
-                                <th>Ascorbic_acid</th>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-
+                            </thead>
+                            <tbody>
+                                <tr style="text-align: center; font-size: 12px; font-weight: bold">
+                                    <td class="user_id">{{ health_details.user.user_id }}</td>
+                                    <td class="first_name">{{ health_details.user.first_name }}</td>
+                                    <td class="last_name">{{ health_details.user.last_name }}</td>
+                                    <td class="address">{{ health_details.user.address }}</td>
+                                    <td class="contact_no">{{ health_details.user.contact_no }}</td>
+                                    <td class="email">{{ health_details.user.email }}</td>
+                                    <td class="age">{{ health_details.user.age }}</td>
+                                    <td class="gender">{{ health_details.user.gender }}</td>
+                                </tr>
+                            </tbody>
                         </table>
 
 
+                        <table id="dt-report" class="table table-bordered table-striped"
+                               style="font-size: 12px; width: 100%; margin-top: 45px; margin-bottom: 45px" role="grid" aria-describedby="example_info">
+
+                            <tr style="text-align: center">
+                                <th>Date</th><th>Device</th><th>Test</th>
+                                <th></th><th></th><th></th><th></th><th></th>
+                                <th></th><th></th><th></th><th></th><th></th>
+                                <th></th>
+                            </tr>
+
+                            <tr style="text-align: center">
+                                <th rowspan="6" style="vertical-align: middle">Jan</th>
+                                <th rowspan="6" style="vertical-align: middle">{{ health_details.user.device }}</th>
+                                <th rowspan="2" style="vertical-align: middle">Vital Sign</th>
+                                <th>Weight</th>
+                                <th>Height</th>
+                                <th>Temperature</th>
+                                <th>Pulse</th>
+                                <th>Bp_systolic</th>
+                                <th>Bp_diastolic</th>
+                                <th>Sto2</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr style="text-align: center; font-size: 12px; font-weight: bold">
+                                <td>{{ health_details.vital_sign.weight }}</td>
+                                <td>{{ health_details.vital_sign.height }}</td>
+                                <td>{{ health_details.vital_sign.temperature }}</td>
+                                <td>{{ health_details.vital_sign.pulse }}</td>
+                                <td>{{ health_details.vital_sign.bp_systolic }}</td>
+                                <td>{{ health_details.vital_sign.bp_diastolic }}</td>
+                                <td>{{ health_details.vital_sign.sto2 }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <th rowspan="2" style="vertical-align: middle">Blood Test</th>
+                                <th>Glucose</th>
+                                <th>Cholestrol</th>
+                                <th>Uric Acid</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr style="text-align: center; font-size: 12px; font-weight: bold">
+                                <td>{{ health_details.blood_test.glucose }}</td>
+                                <td>{{ health_details.blood_test.cholesterol }}</td>
+                                <td>{{ health_details.blood_test.uric_acid }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <th rowspan="2" style="vertical-align: middle">Urine Test</th>
+                                <th>Leukocytes</th>
+                                <th>Nitrate</th>
+                                <th>Urobilinogen</th>
+                                <th>Protein</th>
+                                <th>PH</th>
+                                <th>Blood</th>
+                                <th>Sp_gravity</th>
+                                <th>Ketone</th>
+                                <th>Blirubin</th>
+                                <th>Glucose</th>
+                                <th>Ascorbic_acid</th>
+                            </tr>
+                            <tr style="text-align: center; font-size: 12px; font-weight: bold">
+                                <td>{{ health_details.urine_test.leukocytes }}</td>
+                                <td>{{ health_details.urine_test.nitrate }}</td>
+                                <td>{{ health_details.urine_test.urobilinogen }}</td>
+                                <td>{{ health_details.urine_test.protein }}</td>
+                                <td>{{ health_details.urine_test.ph }}</td>
+                                <td>{{ health_details.urine_test.blood }}</td>
+                                <td>{{ health_details.urine_test.sp_gravity }}</td>
+                                <td>{{ health_details.urine_test.ketone }}</td>
+                                <td>{{ health_details.urine_test.blirubin }}</td>
+                                <td>{{ health_details.urine_test.glucose }}</td>
+                                <td>{{ health_details.urine_test.ascorbic_acid }}</td>
+                            </tr>
+                        </table>
 
                     </div>
                 </div>
