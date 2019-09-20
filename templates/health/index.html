@@ -694,8 +694,10 @@
 
     <script>
 
+    if("{{ error }}"){
+        alert("{{ message }}")
+    }
         $(function() {
-
             $(document).ready(function () {
                 $('#dob').datepicker({
                     date: new Date(),
@@ -714,29 +716,29 @@
             });
 
 
-            {% comment %}
-                    $("#clientDetailsForm").submit(function(evt){
-                        evt.preventDefault();
+            {% comment %}            $("#clientDetailsForm").submit(function(evt){
+                            evt.preventDefault();
 
-                        $.ajax({
-                            type: "POST",
-                            dataType: "json",
-                            url: "{% url 'client_report' %}",
-                            data : $("#clientDetailsForm").serialize(),
-                            success: function(data){
-                                if(data.success){
-                                    $('#healthModal').modal('show');
-                                }else{
-                                    console.log("not success")
+                            $.ajax({
+                                type: "POST",
+                                dataType: "json",
+                                url: "{% url 'client_report' %}",
+                                data : $("#clientDetailsForm").serialize(),
+                                success: function(data){
+                                    if(data.status){
+                                        {#$('#healthModal').modal('show');#}
+                                        localStorage.setItem('health_details', data.health_details);
+                                        window.location.href = "sunya/report";
+
+                                    }else{
+                                        alert(data.message)
+                                    }
+                                },
+                                error: function(xhr, desc, err){
+                                    console.log(err);
                                 }
-                            },
-                            error: function(xhr, desc, err){
-                                console.log(err);
-                            }
-                        });
-                    });
-            {% endcomment %}
-
+                            });
+                        });{% endcomment %}
 
         });
     </script>
