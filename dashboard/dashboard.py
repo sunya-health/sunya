@@ -28,9 +28,6 @@ class Dashboard(View):
                 health_list = get_health_list(user_id)
                 context['health_data'] = health_list
 
-                # health_data = get_health_details(request, user_id)
-                # context['health_details'] = health_data
-
                 return render(request, 'health/dashboard_org.html', context)
 
             org_user_details = get_organization_user_details()

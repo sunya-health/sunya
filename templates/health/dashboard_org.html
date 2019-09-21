@@ -5,7 +5,21 @@
 {% block content %}
 
     <div class="panel panel-default">
-        <div class="table-responsives">
+     <form  style="overflow: auto; border: 1px solid black">
+     <div style="background-color: #8dd3c7; align-content: right">
+         <table class="rectangle">
+             <tr>
+                 <td>Health Report</td>
+                 <td><img style="height: 20%" src="{{ STATIC_URL }}/health/images/logo-tmp.png"></td>
+                 <td><img style="height: 20%" src="{{ STATIC_URL }}/health/images/sunya_logo.png"></td>
+             </tr>
+         </table>
+     </div>
+     <div style="padding-top: 25px; text-align: center">
+         <div><span style="font-size: 20px;">Number of Users: <span>10</span></span></div>
+         <div><span style="font-size: 20px">Number of Tests: <span>100</span></span></div>
+     </div>
+        <div class="table-responsives" style="padding-top: 100px; padding-left: 10px; padding-right: 10px">
             <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                     <div class="col-sm-12">
@@ -94,6 +108,7 @@
                 </div>
             </div>
         </div>
+    </form>
     </div>
 
     <div class="modal fade" id="healthModal" tabindex="-1" role="dialog" aria-labelledby="healthModalLabel" aria-hidden="true">
@@ -112,8 +127,6 @@
                             <div id="tbl" class="user_table form-inline">
                                 <div class="row">
                                     <div class="col-sm-12">
-
-                                        <input style="float: right" class="form-control" type="text" id="datepicker" placeholder="MM/DD/YYYY">
 
                                         <table id="user_health" class="table table-striped table-bordered">
 
@@ -298,7 +311,7 @@
 
             console.log(client_details)
             // populating user details
-            document.getElementById('device_id').innerHTML=client_details.device;
+            document.getElementById('device_id').innerHTML=client_details.device_id;
             document.getElementById('user_id').innerHTML=client_details.user_id;
             document.getElementById('first_name').innerHTML=client_details.first_name;
             document.getElementById('last_name').innerHTML=client_details.last_name;
@@ -338,13 +351,6 @@
     </script>
 
     <script>
-        $(function() {
-            $("#datepicker").datepicker().on('change', function() {
-                // select on change
-                let date = $("#datepicker").datepicker("getDate");
-                console.log($.datepicker.formatDate("dd-mm-yy", date));
-            });
-        });
 
         $(document).ready( function () {
             $('#dt-healthList').DataTable( {
