@@ -26,6 +26,23 @@
         </div>
     </nav>
 
+    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog"  arialabelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="exitAlert" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger alertClass" role="alert">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="hero-wrap js-fullheight" id="home-section" style="background-image: url('{{ STATIC_URL }}/health/images/health-care.jpg');" data-section="home" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -694,9 +711,17 @@
 
     <script>
 
-    if("{{ error }}"){
-        alert("{{ message }}")
-    }
+        if("{{ error }}"){
+            $('.alertClass').html("{{ error_message }}");
+            localStorage.setItem('showModal','yes');
+            $('#alertModal').modal('show');
+        }
+
+        $(".exitAlert").on('click', function () {
+            window.location.href = '/'
+        })
+
+
         $(function() {
             $(document).ready(function () {
                 $('#dob').datepicker({
@@ -714,31 +739,6 @@
                 let today = new Date().toISOString().substr(0, 10);
                 document.querySelector("#reportDate").value = today;
             });
-
-
-            {% comment %}            $("#clientDetailsForm").submit(function(evt){
-                            evt.preventDefault();
-
-                            $.ajax({
-                                type: "POST",
-                                dataType: "json",
-                                url: "{% url 'client_report' %}",
-                                data : $("#clientDetailsForm").serialize(),
-                                success: function(data){
-                                    if(data.status){
-                                        {#$('#healthModal').modal('show');#}
-                                        localStorage.setItem('health_details', data.health_details);
-                                        window.location.href = "sunya/report";
-
-                                    }else{
-                                        alert(data.message)
-                                    }
-                                },
-                                error: function(xhr, desc, err){
-                                    console.log(err);
-                                }
-                            });
-                        });{% endcomment %}
 
         });
     </script>

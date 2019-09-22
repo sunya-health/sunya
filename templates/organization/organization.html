@@ -31,6 +31,14 @@
                                 </th>
                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
                                     aria-label="Position: activate to sort column ascending">
+                                    Urine Strip
+                                </th>
+                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-label="Position: activate to sort column ascending">
+                                    Blood Strip
+                                </th>
+                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-label="Position: activate to sort column ascending">
                                     Manage
                                 </th>
                             </tr>
@@ -41,6 +49,8 @@
                                     <td class="device_id">{{ data.device_id }}</td>
                                     <td class="name">{{ data.name }}</td>
                                     <td class="address">{{ data.address }}</td>
+                                    <td></td>
+                                    <td></td>
                                     <td>
                                         <button type="button" class="btn btn-action assign_user" data-toggle="modal"
                                                 data-target="#assignUserModal"
@@ -54,6 +64,8 @@
                                 <th rowspan="1" colspan="1">Device ID</th>
                                 <th rowspan="1" colspan="1">Name</th>
                                 <th rowspan="1" colspan="1">Address</th>
+                                <th rowspan="1" colspan="1">Urine Strip</th>
+                                <th rowspan="1" colspan="1">Blood Strip</th>
                                 <th rowspan="1" colspan="1">Manage</th>
                             </tr>
                             </tfoot>
