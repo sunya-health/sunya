@@ -22,11 +22,11 @@ class Dashboard(View):
             is_superuser = User.objects.get(id=user_id).is_superuser
             is_orguser = User.objects.get(id=user_id).is_orguser
 
-            device_id = Organization_user.objects.filter(user=user_id).get().device_id
-
             context = context_processors.base_variables_all(request)
 
             if not is_superuser and is_orguser:
+                device_id = Organization_user.objects.filter(user=user_id).get().device_id
+
                 health_list = get_health_list(device_id)
                 total_user = Clients.objects.filter(device_id=device_id).count()
                 total_tests = Health.objects.filter(device_id=device_id).count()
