@@ -7,6 +7,8 @@ class Organization(models.Model):
     device_id = models.CharField(max_length=150, unique=True)
     address = models.CharField(max_length=50)
     name = models.CharField(max_length=100)
+    urine_strip = models.IntegerField(default=0)
+    blood_strip = models.IntegerField(default=0)
 
 
 class Organization_user(models.Model):

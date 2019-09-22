@@ -49,12 +49,43 @@
                                     <td class="device_id">{{ data.device_id }}</td>
                                     <td class="name">{{ data.name }}</td>
                                     <td class="address">{{ data.address }}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        {% if data.urine_strip == 0 %}
+                                            <button type="button" class="btn btn-danger"
+                                                    data-values='{
+                                                    "id": "{{ data.id }}",
+                                                    "urine_strip": "{{ data.urine_strip }}"}'>
+                                            </button>
+                                        {% else %}
+                                            <button type="button" class="btn btn-success"
+                                                    data-values='{
+                                                    "id": "{{ data.id }}",
+                                                    "urine_strip": "{{ data.urine_strip }}"}'>
+                                            </button>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if data.blood_strip == 0 %}
+                                            <button type="button" class="btn btn-danger"
+                                                    data-values='{
+                                                    "id": "{{ data.id }}",
+                                                    "blood_strip": "{{ data.blood_strip }}"}'>
+                                            </button>
+                                        {% else %}
+                                            <button type="button" class="btn btn-success"
+                                                    data-values='{
+                                                    "id": "{{ data.id }}",
+                                                    "blood_strip": "{{ data.blood_strip }}"}'>
+                                            </button>
+                                        {% endif %}
+                                    </td>
                                     <td>
                                         <button type="button" class="btn btn-action assign_user" data-toggle="modal"
                                                 data-target="#assignUserModal"
-                                                data-values='{"device_id": "{{ data.device_id }}"}'>Assign User</button>
+                                                data-values='{
+                                                "device_id": "{{ data.device_id }}",
+                                                "users": "{{ users }}"
+                                                }'>Assign User</button>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -109,7 +140,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- Assign User -->
         <div class="modal fade" id="assignUserModal" tabindex="-1" role="dialog" aria-labelledby="assignUserModalLabel" aria-hidden="true">
@@ -198,7 +228,7 @@
 
             regex = /'/gi;
 
-            var users = $('#dt-orgList').find('.users').text();
+            var users = values.users;
             users = JSON.parse(users.replace(regex, '"'));
 
             var content = '<option selected hidden value="None">Choose</option>' ;
