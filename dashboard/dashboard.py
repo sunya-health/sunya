@@ -22,11 +22,18 @@ class Dashboard(View):
             is_superuser = User.objects.get(id=user_id).is_superuser
             is_orguser = User.objects.get(id=user_id).is_orguser
 
+            device_id = Organization_user.objects.filter(user=user_id).get().device_id
+
             context = context_processors.base_variables_all(request)
 
             if not is_superuser and is_orguser:
-                health_list = get_health_list(user_id)
+                health_list = get_health_list(device_id)
+                total_user = Clients.objects.filter(device_id=device_id).count()
+                total_tests = Health.objects.filter(device_id=device_id).count()
+
                 context['health_data'] = health_list
+                context['total_user'] = total_user
+                context['total_tests'] = total_tests
 
                 return render(request, 'health/dashboard_org.html', context)
 
@@ -38,9 +45,7 @@ class Dashboard(View):
             return redirect('main')
 
 
-def get_health_list(user_id):
-
-    device_id = Organization_user.objects.filter(user=user_id).get().device_id
+def get_health_list(device_id):
     user = Clients.objects.filter(device_id=device_id)
 
     if user:
