@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^sunya/report/$', main.ClientReports.as_view(), name='client_report'),
     url(r'^sunya/organization/$', main.OrganizationDetails.as_view(), name='organization'),
     url(r'^sunya/organization/user/$', main.AssignOrCreateUser.as_view(), name='assign_user'),
+    url(r'^sunya/organization/strip/$', main.StripUpdate.as_view(), name='strip_update'),
     url(r'^settings/', include('settings.urls')),
 ]

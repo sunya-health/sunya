@@ -52,11 +52,11 @@ class OrganizationDetails(View):
         for org in organizations:
             values = org.values()
             if 'f' in values or 0 in values:
-                org['status'] = 'red'
+                org['status'] = 'btn btn-danger'
             elif org['urine_strip'] <= 100 or org['blood_strip'] <= 100:
-                org['status'] = 'yellow'
+                org['status'] = 'btn btn-warning'
             else:
-                org['status'] = 'green'
+                org['status'] = 'btn btn-success'
 
             organizations_list.append(org)
 
@@ -129,6 +129,22 @@ class AssignOrCreateUser(View):
             return redirect('organization')
 
 
+class StripUpdate(View):
+    def post(self, request):
+        if request.method == 'POST':
+            org_id = int(request.POST.get('org_id'))
+            blood_strip = int(request.POST.get('blood_strip'))
+            urine_strip = int(request.POST.get('urine_strip'))
+
+            try:
+                Organization.objects.filter(id=org_id).update(
+                    blood_strip=blood_strip, urine_strip=urine_strip)
+            except Exception as e:
+                print(e)
+
+            return redirect('organization')
+
+
 class HealthList(generics.ListCreateAPIView):
     queryset = Health.objects.order_by('user_id', '-created_at').distinct('user_id')
     serializer_class = HealthSerializer
@@ -167,7 +183,24 @@ class HealthList(generics.ListCreateAPIView):
         if 'vital_sign' in request.data:
             vital_sign_serializer = VitalSignSerializer(data=request.data.pop('vital_sign'))
             if vital_sign_serializer.is_valid():
-                vital_sign = Vital_sign(user=client, **vital_sign_serializer.data)
+
+                v_data = vital_sign_serializer.data
+
+                temperature_sensor = 't' if 'temperature' in v_data else 'f'
+                weighing_machine = 't' if 'weight' in v_data else 'f'
+                measuring_tool = 't' if 'height' in v_data else 'f'
+                bp_sensor = 't' if 'bp_diastolic' in v_data or 'bp_systoic' in v_data else 'f'
+                pulse_sensor = 't' if 'pulse' in v_data else 'f'
+
+                Organization.objects.filter(device_id=device_id).update(
+                    temperature_sensor = temperature_sensor,
+                    weighing_machine = weighing_machine,
+                    measuring_tool = measuring_tool,
+                    bp_sensor = bp_sensor,
+                    pulse_sensor = pulse_sensor
+                )
+
+                vital_sign = Vital_sign(user=client, **v_data)
                 vital_sign.save()
             else:
                 return Response(vital_sign_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -177,16 +210,29 @@ class HealthList(generics.ListCreateAPIView):
             if blood_test_serializer.is_valid():
                 blood_test = Blood_test(user=client, **blood_test_serializer.data)
                 blood_test.save()
+
+                blood_sensor = 't'
             else:
                 return Response(blood_test_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            blood_sensor = 'f'
 
         if 'urine_test' in request.data:
             urine_test_serializer = UrineTestSerializer(data=request.data.pop('urine_test'))
             if urine_test_serializer.is_valid():
                 urine_test = Urine_test(user=client, **urine_test_serializer.data)
                 urine_test.save()
+
+                urine_device = 't'
             else:
                 return Response(urine_test_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            urine_device = 'f'
+
+        Organization.objects.filter(device_id=device_id).update(
+            blood_sensor = blood_sensor,
+            urine_device = urine_device
+        )
 
         # created_at = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         created_at = datetime.datetime.now().date()

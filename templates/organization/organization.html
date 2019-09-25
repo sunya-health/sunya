@@ -46,13 +46,12 @@
                                     <td class="name">{{ data.name }}</td>
                                     <td class="address">{{ data.address }}</td>
                                     <td>
-                                        {% if data.status == 'red' %}
-                                        <button type="button" class="btn btn-danger"></button>
-                                        {% elif data.status == 'yellow' %}
-                                        <button type="button" class="btn btn-warning"></button>
-                                        {% else %}
-                                        <button type="button" class="btn btn-success"></button>
-                                        {% endif %}
+                                        <button type="button" data-toggle="modal"
+                                                class="{{ data.status }} strip_values"
+                                                data-target="#stripModal"
+                                                data-values='{
+                                                "data": "{{ data }}"
+                                                }'></button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-action assign_user" data-toggle="modal"
@@ -186,6 +185,78 @@
             </div>
         </div>
 
+        <!-- Strip -->
+        <div class="modal fade" id="stripModal" tabindex="-1" role="dialog" aria-labelledby="stripModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">Strip</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/sunya/organization/strip/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group" style="display: none;">
+                                <input id="org_id" name="org_id" class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="ecg">ECG</label>
+                                <button id="ecg" name="ecg" class="btn btn-danger" type="button" disabled></button>
+                            </div>
+                            <div class="form-group">
+                                <label for="temperature_sensor">Temperature Sensor</label>
+                                <button id="temperature_sensor" name="temperature_sensor" class="btn btn-danger" type="button" disabled></button>
+                            </div>
+                            <div class="form-group">
+                                <label for="weighing_machine">Weighing Machinne</label>
+                                <button id="weighing_machine" name="weighing_machine" class="btn btn-danger" type="button" disabled></button>
+                            </div>
+                            <div class="form-group">
+                                <label for="measuring_tool">Measuing Tool</label>
+                                <button id="measuring_tool" name="measuring_tool" class="btn btn-danger" type="button" disabled></button>
+                            </div>
+                            <div class="form-group">
+                                <label for="bp_sensor">BP Sensor</label>
+                                <button id="bp_sensor" name="bp_sensor" class="btn btn-danger" type="button" disabled></button>
+                            </div>
+                            <div class="form-group">
+                                <label for="pulse_sensor">Pulse Sensor</label>
+                                <button id="pulse_sensor" name="pulse_sensor" class="btn btn-danger" type="button" disabled></button>
+                            </div>
+                            <div class="form-group">
+                                <label for="blood_sensor">Blood Sensor</label>
+                                <button id="blood_sensor" name="blood_sensor" class="btn btn-danger" type="button" disabled></button>
+                            </div>
+                            <div class="form-group">
+                                <label for="urine_device">Urine Device</label>
+                                <button id="urine_device" name="urine_device" class="btn btn-danger" type="button" disabled></button>
+                            </div>
+                            <div class="form-group">
+                                <label for="glucose_device">Glucose Device</label>
+                                <button id="glucose_device" name="glucose_device" class="btn btn-danger" type="button" disabled></button>
+                            </div>
+                            <div class="form-group">
+                                <label for="blood_strip">Blood Strip</label>
+                                <input id="blood_strip" name="blood_strip" class="form-control" type="number"
+                                       required="required" style="width: 50%">
+                            </div>
+                            <div class="form-group">
+                                <label for="urine_strip">Blood Strip</label>
+                                <input id="urine_strip" name="urine_strip" class="form-control" type="number"
+                                       required="required" style="width: 50%">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}
@@ -202,6 +273,8 @@
     </script>
 
     <script>
+        // Assign User
+
         $('.assign_user').on('click', function () {
             // Getting Select option values
 
@@ -250,6 +323,50 @@
                 });
             });
         });
+
+        // Strip Data
+        $('.strip_values').on('click', function () {
+            // Getting Select option values
+
+            var values = $(this).data('values');
+            regex = /'/gi;
+
+            var data = values.data;
+            data = JSON.parse(data.replace(regex, '"'));
+
+            $('#org_id').val(data.id);
+            $('#blood_strip').val(data.blood_strip);
+            $('#urine_strip').val(data.urine_strip);
+
+            if(data.ecg != 'f'){
+                document.getElementById('ecg').className = "btn btn-success"
+            }
+            if(data.temperature_sensor != 'f'){
+                document.getElementById('temperature_sensor').className = "btn btn-success"
+            }
+            if(data.measuring_tool != 'f'){
+                document.getElementById('measuring_tool').className = "btn btn-success"
+            }
+            if(data.weighing_machine != 'f'){
+                document.getElementById('weighing_machine').className = "btn btn-success"
+            }
+            if(data.bp_sensor != 'f'){
+                document.getElementById('bp_sensor').className = "btn btn-success"
+            }
+            if(data.pulse_sensor != 'f'){
+                document.getElementById('pulse_sensor').className = "btn btn-success"
+            }
+            if(data.blood_sensor != 'f'){
+                document.getElementById('blood_sensor').className = "btn btn-success"
+            }
+            if(data.urine_device != 'f'){
+                document.getElementById('urine_device').className = "btn btn-success"
+            }
+            if(data.glucose_device != 'f'){
+                document.getElementById('glucose_device').className = "btn btn-success"
+            }
+        });
+
     </script>
 
 {% endblock %}
