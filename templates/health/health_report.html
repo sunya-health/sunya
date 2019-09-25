@@ -74,14 +74,14 @@
                             </thead>
                             <tbody>
                                 <tr style="text-align: center; font-size: 12px; font-weight: bold">
-                                    <td class="user_id">{{ health_details.user.user_id }}</td>
-                                    <td class="first_name">{{ health_details.user.first_name }}</td>
-                                    <td class="last_name">{{ health_details.user.last_name }}</td>
-                                    <td class="address">{{ health_details.user.address }}</td>
-                                    <td class="contact_no">{{ health_details.user.contact_no }}</td>
-                                    <td class="email">{{ health_details.user.email }}</td>
-                                    <td class="age">{{ health_details.user.age }}</td>
-                                    <td class="gender">{{ health_details.user.gender }}</td>
+                                    <td class="user_id">{{ health_details.0.user.user_id }}</td>
+                                    <td class="first_name">{{ health_details.0.user.first_name }}</td>
+                                    <td class="last_name">{{ health_details.0.user.last_name }}</td>
+                                    <td class="address">{{ health_details.0.user.address }}</td>
+                                    <td class="contact_no">{{ health_details.0.user.contact_no }}</td>
+                                    <td class="email">{{ health_details.0.user.email }}</td>
+                                    <td class="age">{{ health_details.0.user.age }}</td>
+                                    <td class="gender">{{ health_details.0.user.gender }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -97,9 +97,11 @@
                                 <th></th>
                             </tr>
 
+                            {% for data in health_details %}
+
                             <tr style="text-align: center">
-                                <th rowspan="6" style="vertical-align: middle">Jan</th>
-                                <th rowspan="6" style="vertical-align: middle">{{ health_details.user.device }}</th>
+                                <th rowspan="6" style="vertical-align: middle">{{ data.created_at }}</th>
+                                <th rowspan="6" style="vertical-align: middle">{{ data.user.device }}</th>
                                 <th rowspan="2" style="vertical-align: middle">Vital Sign</th>
                                 <th>Weight</th>
                                 <th>Height</th>
@@ -114,13 +116,13 @@
                                 <th></th>
                             </tr>
                             <tr style="text-align: center; font-size: 12px; font-weight: bold">
-                                <td>{{ health_details.vital_sign.weight }}</td>
-                                <td>{{ health_details.vital_sign.height }}</td>
-                                <td>{{ health_details.vital_sign.temperature }}</td>
-                                <td>{{ health_details.vital_sign.pulse }}</td>
-                                <td>{{ health_details.vital_sign.bp_systolic }}</td>
-                                <td>{{ health_details.vital_sign.bp_diastolic }}</td>
-                                <td>{{ health_details.vital_sign.sto2 }}</td>
+                                <td>{{ data.vital_sign.weight }}</td>
+                                <td>{{ data.vital_sign.height }}</td>
+                                <td>{{ data.vital_sign.temperature }}</td>
+                                <td>{{ data.vital_sign.pulse }}</td>
+                                <td>{{ data.vital_sign.bp_systolic }}</td>
+                                <td>{{ data.vital_sign.bp_diastolic }}</td>
+                                <td>{{ data.vital_sign.sto2 }}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -140,9 +142,9 @@
                                 <th></th>
                             </tr>
                             <tr style="text-align: center; font-size: 12px; font-weight: bold">
-                                <td>{{ health_details.blood_test.glucose }}</td>
-                                <td>{{ health_details.blood_test.cholesterol }}</td>
-                                <td>{{ health_details.blood_test.uric_acid }}</td>
+                                <td>{{ data.blood_test.glucose }}</td>
+                                <td>{{ data.blood_test.cholesterol }}</td>
+                                <td>{{ data.blood_test.uric_acid }}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -167,18 +169,19 @@
                                 <th>Ascorbic_acid</th>
                             </tr>
                             <tr style="text-align: center; font-size: 12px; font-weight: bold">
-                                <td>{{ health_details.urine_test.leukocytes }}</td>
-                                <td>{{ health_details.urine_test.nitrate }}</td>
-                                <td>{{ health_details.urine_test.urobilinogen }}</td>
-                                <td>{{ health_details.urine_test.protein }}</td>
-                                <td>{{ health_details.urine_test.ph }}</td>
-                                <td>{{ health_details.urine_test.blood }}</td>
-                                <td>{{ health_details.urine_test.sp_gravity }}</td>
-                                <td>{{ health_details.urine_test.ketone }}</td>
-                                <td>{{ health_details.urine_test.blirubin }}</td>
-                                <td>{{ health_details.urine_test.glucose }}</td>
-                                <td>{{ health_details.urine_test.ascorbic_acid }}</td>
+                                <td>{{ data.urine_test.leukocytes }}</td>
+                                <td>{{ data.urine_test.nitrate }}</td>
+                                <td>{{ data.urine_test.urobilinogen }}</td>
+                                <td>{{ data.urine_test.protein }}</td>
+                                <td>{{ data.urine_test.ph }}</td>
+                                <td>{{ data.urine_test.blood }}</td>
+                                <td>{{ data.urine_test.sp_gravity }}</td>
+                                <td>{{ data.urine_test.ketone }}</td>
+                                <td>{{ data.urine_test.blirubin }}</td>
+                                <td>{{ data.urine_test.glucose }}</td>
+                                <td>{{ data.urine_test.ascorbic_acid }}</td>
                             </tr>
+                            {% endfor %}
                         </table>
 
                     </div>

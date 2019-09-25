@@ -1,13 +1,10 @@
-import json
-
 import requests
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
 from account.models import User
-from sunya.models import Health, Organization_user, Organization, Clients, Vital_sign, Blood_test, Urine_test
-from sunya.serializers import HealthSerializer
+from sunya.models import Health, Organization_user, Clients, Vital_sign, Blood_test, Urine_test
 from . import context_processors
 
 
@@ -68,11 +65,13 @@ def get_health_list(device_id):
 
 def get_health_details(request, user_id):
     try:
-        health_id = Health.objects.filter(user=user_id).order_by('user_id', '-created_at').distinct('user_id').get().id
-
-        request_url = request.build_absolute_uri(reverse('health_get', args=(health_id, )))
-        health_data = requests.get(request_url).json()
-        return health_data
+        health_id = Health.objects.filter(user=user_id).order_by('-created_at').values('id')
+        health_data_list = []
+        for h in health_id:
+            request_url = request.build_absolute_uri(reverse('health_get', args=(int(h['id']), )))
+            health_data = requests.get(request_url).json()
+            health_data_list.append(health_data)
+        return health_data_list
     except Exception as e:
         print(e)
         return None

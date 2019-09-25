@@ -38,6 +38,7 @@ class ClientReports(View):
                           {'error': 1, 'error_message': 'Client does not exist!!!'})
 
         health_data = get_health_details(request, user_id)
+        print(health_data)
         return render(request, 'health/health_report.html', {'health_details': health_data})
 
 
@@ -47,6 +48,18 @@ class OrganizationDetails(View):
             return redirect('main')
         context = context_processors.base_variables_all(request)
         organizations = list(Organization.objects.values())
+        organizations_list = []
+        for org in organizations:
+            values = org.values()
+            if 'f' in values or 0 in values:
+                org['status'] = 'red'
+            elif org['urine_strip'] <= 100 or org['blood_strip'] <= 100:
+                org['status'] = 'yellow'
+            else:
+                org['status'] = 'green'
+
+            organizations_list.append(org)
+
         context['organization'] = organizations
         context['users'] = list(User.objects.filter(is_orguser=True).values('id', 'username'))
         return render(request, "organization/organization.html", context)
@@ -56,8 +69,10 @@ class OrganizationDetails(View):
             device_id = request.POST.get('device_id')
             name = request.POST.get('name')
             address = request.POST.get('address')
+            blood_strip = request.POST.get('blood_strip')
+            urine_strip = request.POST.get('urine_strip')
 
-            Organization.objects.create(device_id=device_id, name=name, address=address)
+            Organization.objects.create(device_id=device_id, name=name, address=address, blood_strip=blood_strip, urine_strip=urine_strip)
 
             return redirect('organization')
 
@@ -173,7 +188,8 @@ class HealthList(generics.ListCreateAPIView):
             else:
                 return Response(urine_test_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        created_at = datetime.datetime.now()
+        # created_at = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        created_at = datetime.datetime.now().date()
 
         health = Health.objects.create(user=client, device=device, vital_sign=vital_sign, blood_test=blood_test, urine_test=urine_test,
                                        created_at=created_at)

@@ -42,7 +42,7 @@ class HealthSerializer(serializers.ModelSerializer):
     vital_sign = VitalSignSerializer(required=False)
     blood_test = BloodTestSerializer(required=False)
     urine_test = UrineTestSerializer(required=False)
-    created_at = serializers.DateTimeField(default=datetime.datetime.now())
+    created_at = serializers.DateField(default=datetime.datetime.now().date())
 
     class Meta:
         model = Health

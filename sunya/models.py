@@ -9,6 +9,15 @@ class Organization(models.Model):
     name = models.CharField(max_length=100)
     urine_strip = models.IntegerField(default=0)
     blood_strip = models.IntegerField(default=0)
+    ecg = models.CharField(max_length=2, default='f')
+    temperature_sensor = models.CharField(max_length=2, default='f')
+    weighing_machine = models.CharField(max_length=2, default='f')  # weight
+    measuring_tool = models.CharField(max_length=2, default='f')    # height
+    bp_sensor = models.CharField(max_length=2, default='f')     # bp_systolic|bp_diastolic
+    pulse_sensor = models.CharField(max_length=2, default='f')  # pulse
+    blood_sensor = models.CharField(max_length=2, default='f')  # blood_test
+    urine_device = models.CharField(max_length=2, default='f')  # urine_test
+    glucose_device = models.CharField(max_length=2, default='f')
 
 
 class Organization_user(models.Model):
@@ -69,7 +78,7 @@ class Health(models.Model):
     vital_sign = models.ForeignKey(Vital_sign, on_delete=models.CASCADE, blank=True, null=True)
     blood_test = models.ForeignKey(Blood_test, on_delete=models.CASCADE, blank=True, null=True)
     urine_test = models.ForeignKey(Urine_test, on_delete=models.CASCADE, blank=True, null=True)
-    created_at = models.DateTimeField()
+    created_at = models.DateField()
 
 
 
