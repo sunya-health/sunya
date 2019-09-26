@@ -166,6 +166,34 @@ class HealthList(generics.ListCreateAPIView):
             }
             return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
+        blood_strip = device.get().blood_strip
+        urine_strip = device.get().urine_strip
+
+        if blood_strip == 0 and urine_strip == 0:
+            error = {
+                "strip": [
+                    "Blood strip and Urine strip not available"
+                ]
+            }
+            return Response(error, status=status.HTTP_400_BAD_REQUEST)
+        elif blood_strip == 0:
+            error = {
+                "strip": [
+                    "Blood strip not available"
+                ]
+            }
+            return Response(error, status=status.HTTP_400_BAD_REQUEST)
+        if urine_strip == 0:
+            error = {
+                "strip": [
+                    "Urine strip and Urine strip not available"
+                ]
+            }
+            return Response(error, status=status.HTTP_400_BAD_REQUEST)
+
+        blood_strip = blood_strip - 1
+        urine_strip = urine_strip - 1
+
         if clients:
             client = clients.get()
             device = device.get()
@@ -231,7 +259,9 @@ class HealthList(generics.ListCreateAPIView):
 
         Organization.objects.filter(device_id=device_id).update(
             blood_sensor = blood_sensor,
-            urine_device = urine_device
+            urine_device = urine_device,
+            blood_strip = blood_strip,
+            urine_strip = urine_strip
         )
 
         # created_at = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
