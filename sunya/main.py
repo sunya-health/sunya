@@ -57,10 +57,18 @@ class OrganizationDetails(View):
             else:
                 org['status'] = 'btn btn-success'
 
+            device_id = org['device_id']
+            org_user = Organization_user.objects.filter(device_id=device_id)
+            if org_user:
+                user = list(User.objects.filter(id=int(org_user.get().user_id))
+                            .values('id', 'username', 'first_name', 'last_name', 'email', 'address', 'contact_no'))[0]
+                org['users'] = user
+            else:
+                org['users'] = {}
+
             organizations_list.append(org)
 
         context['organization'] = organizations
-        context['users'] = list(User.objects.filter(is_orguser=True).values('id', 'username'))
         return render(request, "organization/organization.html", context)
 
     def post(self, request):
@@ -118,9 +126,16 @@ class AssignOrCreateUser(View):
                     Organization_user.objects.create(user=user, device=device)
                     messages.success(request, 'Successfully Assigned User!!!')
             else:
+                device = Organization.objects.get(device_id=device_id)
                 user_id = Organization_user.objects.get(device=device_id).user_id
                 assigned_user = User.objects.get(id=user_id).username
-                messages.error(request, 'User is already assigned to a user: %s' % assigned_user)
+
+                if username == assigned_user:
+                    messages.error(request, 'User: %s is already assigned to this device!!!' % username)
+                else:
+                    user = create_user(username, password, f_name, l_name, email, address, contact)
+                    Organization_user.objects.filter(device=device).update(user=user)
+                    messages.success(request, 'Successfully Assigned User!!!')
 
             return redirect('organization')
 

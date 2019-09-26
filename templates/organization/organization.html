@@ -58,7 +58,7 @@
                                                 data-target="#assignUserModal"
                                                 data-values='{
                                                 "device_id": "{{ data.device_id }}",
-                                                "users": "{{ users }}"
+                                                "users": "{{ data.users }}"
                                                 }'>Assign User</button>
                                     </td>
                                 </tr>
@@ -135,12 +135,6 @@
                     <div class="modal-body">
                         <form action="/sunya/organization/user/" method="post">
                             {% csrf_token %}
-                            <span style="font-size: 20px">Select existing user</span>
-                            <div class="form-group" id="users_select">
-                                <label>Users</label>
-                                <select class="custom-select mr-sm-2" name="users"></select>
-                            </div>
-                            <span style="font-size: 20px">Create new user</span>
                             <div class="form-group">
                                 <input id="username" placeholder="Username" name="username" class="form-control" type="text" required="required">
                             </div>
@@ -167,7 +161,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" id="saveAssignUser" class="btn btn-primary">Save changes</button>
+                                <button type="submit" id="editAssignUser" class="btn btn-primary">Edit</button>
                             </div>
                         </form>
                     </div>
@@ -276,38 +271,41 @@
             var users = values.users;
             users = JSON.parse(users.replace(regex, '"'));
 
-            var content = '<option selected hidden value="None">Choose</option>' ;
-            for(var i=0; i<users.length; i++){
-                content += '<option value="' + users[i].id + '">' + users[i].username + '</option>'
+            if (Object.keys(users).length > 0) {
+                $("#username").val(users.username).attr('disabled', 'disabled');
+                $("#password").attr('disabled', 'disabled');
+                $("#f_name").val(users.first_name).attr('disabled', 'disabled');
+                $("#l_name").val(users.last_name).attr('disabled', 'disabled');
+                $("#email").val(users.email).attr('disabled', 'disabled');
+                $("#address").val(users.address).attr('disabled', 'disabled');
+                $("#contact").val(users.contact_no).attr('disabled', 'disabled');
+                $("#editAssignUser").removeAttr('disabled');
+                document.getElementById("saveAssignUser").disabled = "true";
             }
-            content += '<option>None</option>' ;
+            else{
+                $("#username").val('').removeAttr('disabled');
+                $("#password").val('').removeAttr('disabled');
+                $("#f_name").val('').removeAttr('disabled');
+                $("#l_name").val('').removeAttr('disabled');
+                $("#email").val('').removeAttr('disabled');
+                $("#address").val('').removeAttr('disabled');
+                $("#contact").val('').removeAttr('disabled');
+                $("#editAssignUser").removeAttr('disabled');
+                document.getElementById("editAssignUser").disabled = "true";
+                $("#saveAssignUser").removeAttr('disabled');
+            }
+        });
 
-            $("#users_select select").html(content);
-
-            $(function () {
-                $("#users_select select").change(function () {
-                    var selectedText = $(this).find("option:selected").text();
-                    {#var selectedValue = $(this).val();#}
-                    {#alert("Selected Text: " + selectedText + " Value: " + selectedValue);#}
-                    if (selectedText === 'None'){
-                        $("#username").removeAttr('disabled');
-                        $("#password").removeAttr('disabled');
-                        $("#f_name").removeAttr('disabled');
-                        $("#l_name").removeAttr('disabled');
-                        $("#email").removeAttr('disabled');
-                        $("#address").removeAttr('disabled');
-                        $("#contact").removeAttr('disabled');
-                    }else{
-                        $("#username").attr('disabled', 'disabled');
-                        $("#password").attr('disabled', 'disabled');
-                        $("#f_name").attr('disabled', 'disabled');
-                        $("#l_name").attr('disabled', 'disabled');
-                        $("#email").attr('disabled', 'disabled');
-                        $("#address").attr('disabled', 'disabled');
-                        $("#contact").attr('disabled', 'disabled');
-                    }
-                });
-            });
+        $('#editAssignUser').on('click', function () {
+            $("#username").val('').removeAttr('disabled');
+            $("#password").val('').removeAttr('disabled');
+            $("#f_name").val('').removeAttr('disabled');
+            $("#l_name").val('').removeAttr('disabled');
+            $("#email").val('').removeAttr('disabled');
+            $("#address").val('').removeAttr('disabled');
+            $("#contact").val('').removeAttr('disabled');
+            document.getElementById("editAssignUser").disabled = "true";
+            $("#saveAssignUser").removeAttr('disabled');
         });
 
         // Strip Data
