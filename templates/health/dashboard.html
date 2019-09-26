@@ -46,14 +46,6 @@
                                     aria-label="Position: activate to sort column ascending">
                                     Email
                                 </th>
-                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
-                                    aria-label="Position: activate to sort column ascending">
-                                    Age
-                                </th>
-                                <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
-                                    aria-label="Position: activate to sort column ascending">
-                                    Gender
-                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -66,8 +58,6 @@
                                     <td class="address">{{ data.address }}</td>
                                     <td class="contact_no">{{ data.contact_no }}</td>
                                     <td class="email">{{ data.email }}</td>
-                                    <td class="age">{{ data.age }}</td>
-                                    <td class="gender">{{ data.gender }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -80,8 +70,6 @@
                                 <th rowspan="1" colspan="1">Address</th>
                                 <th rowspan="1" colspan="1">Contact No.</th>
                                 <th rowspan="1" colspan="1">Email</th>
-                                <th rowspan="1" colspan="1">Age</th>
-                                <th rowspan="1" colspan="1">Gender</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -96,7 +84,7 @@
 {% block javascript %}
 
     <script>
-            $(document).ready( function () {
+        $(document).ready( function () {
             $('#dt-healthList').DataTable( {
                 "bFilter": true
             } );
