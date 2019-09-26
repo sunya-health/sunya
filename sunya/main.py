@@ -150,126 +150,128 @@ class HealthList(generics.ListCreateAPIView):
     serializer_class = HealthSerializer
 
     def create(self, request, *args, **kwargs):
-        vital_sign = blood_test = urine_test = None
 
-        device_id = request.data['user']['device']
-        user_id = request.data['user']['user_id']
+        for data in request.data:
+            vital_sign = blood_test = urine_test = None
 
-        clients = Clients.objects.filter(user_id=user_id)
-        device = Organization.objects.filter(device_id=device_id)
+            device_id = data['user']['device']
+            user_id = data['user']['user_id']
 
-        if not device:
-            error =  {
-                "device": [
-                    "Object with device_id=%s does not exist." % device_id
-                ]
-            }
-            return Response(error, status=status.HTTP_400_BAD_REQUEST)
+            clients = Clients.objects.filter(user_id=user_id)
+            device = Organization.objects.filter(device_id=device_id)
 
-        blood_strip = device.get().blood_strip
-        urine_strip = device.get().urine_strip
+            if not device:
+                error =  {
+                    "device": [
+                        "Object with device_id=%s does not exist." % device_id
+                    ]
+                }
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
-        if blood_strip == 0 and urine_strip == 0:
-            error = {
-                "strip": [
-                    "Blood strip and Urine strip not available"
-                ]
-            }
-            return Response(error, status=status.HTTP_400_BAD_REQUEST)
-        elif blood_strip == 0:
-            error = {
-                "strip": [
-                    "Blood strip not available"
-                ]
-            }
-            return Response(error, status=status.HTTP_400_BAD_REQUEST)
-        if urine_strip == 0:
-            error = {
-                "strip": [
-                    "Urine strip and Urine strip not available"
-                ]
-            }
-            return Response(error, status=status.HTTP_400_BAD_REQUEST)
+            blood_strip = device.get().blood_strip
+            urine_strip = device.get().urine_strip
 
-        blood_strip = blood_strip - 1
-        urine_strip = urine_strip - 1
+            if blood_strip == 0 and urine_strip == 0:
+                error = {
+                    "strip": [
+                        "Blood strip and Urine strip not available"
+                    ]
+                }
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
+            elif blood_strip == 0:
+                error = {
+                    "strip": [
+                        "Blood strip not available"
+                    ]
+                }
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
+            if urine_strip == 0:
+                error = {
+                    "strip": [
+                        "Urine strip and Urine strip not available"
+                    ]
+                }
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
-        if clients:
-            client = clients.get()
-            device = device.get()
-        else:
-            client_details = request.data.pop('user')
-            client_serializer = ClientSerializer(data=client_details)
+            blood_strip = blood_strip - 1
+            urine_strip = urine_strip - 1
 
-            if client_serializer.is_valid():
-                device = Organization.objects.get(device_id=client_details.pop('device'))
-                client = Clients(device=device, **client_details)
-                client.save()
+            if clients:
+                client = clients.get()
+                device = device.get()
             else:
-                return Response(client_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                client_details = data.pop('user')
+                client_serializer = ClientSerializer(data=client_details)
 
-        if 'vital_sign' in request.data:
-            vital_sign_serializer = VitalSignSerializer(data=request.data.pop('vital_sign'))
-            if vital_sign_serializer.is_valid():
+                if client_serializer.is_valid():
+                    device = Organization.objects.get(device_id=client_details.pop('device'))
+                    client = Clients(device=device, **client_details)
+                    client.save()
+                else:
+                    return Response(client_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-                v_data = vital_sign_serializer.data
+            if 'vital_sign' in data:
+                vital_sign_serializer = VitalSignSerializer(data=data.pop('vital_sign'))
+                if vital_sign_serializer.is_valid():
 
-                temperature_sensor = 't' if 'temperature' in v_data else 'f'
-                weighing_machine = 't' if 'weight' in v_data else 'f'
-                measuring_tool = 't' if 'height' in v_data else 'f'
-                bp_sensor = 't' if 'bp_diastolic' in v_data or 'bp_systoic' in v_data else 'f'
-                pulse_sensor = 't' if 'pulse' in v_data else 'f'
+                    v_data = vital_sign_serializer.data
 
-                Organization.objects.filter(device_id=device_id).update(
-                    temperature_sensor = temperature_sensor,
-                    weighing_machine = weighing_machine,
-                    measuring_tool = measuring_tool,
-                    bp_sensor = bp_sensor,
-                    pulse_sensor = pulse_sensor
-                )
+                    temperature_sensor = 't' if 'temperature' in v_data else 'f'
+                    weighing_machine = 't' if 'weight' in v_data else 'f'
+                    measuring_tool = 't' if 'height' in v_data else 'f'
+                    bp_sensor = 't' if 'bp_diastolic' in v_data or 'bp_systoic' in v_data else 'f'
+                    pulse_sensor = 't' if 'pulse' in v_data else 'f'
 
-                vital_sign = Vital_sign(user=client, **v_data)
-                vital_sign.save()
+                    Organization.objects.filter(device_id=device_id).update(
+                        temperature_sensor = temperature_sensor,
+                        weighing_machine = weighing_machine,
+                        measuring_tool = measuring_tool,
+                        bp_sensor = bp_sensor,
+                        pulse_sensor = pulse_sensor
+                    )
+
+                    vital_sign = Vital_sign(user=client, **v_data)
+                    vital_sign.save()
+                else:
+                    return Response(vital_sign_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            if 'blood_test' in data:
+                blood_test_serializer = BloodTestSerializer(data=data.pop('blood_test'))
+                if blood_test_serializer.is_valid():
+                    blood_test = Blood_test(user=client, **blood_test_serializer.data)
+                    blood_test.save()
+
+                    blood_sensor = 't'
+                else:
+                    return Response(blood_test_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             else:
-                return Response(vital_sign_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                blood_sensor = 'f'
 
-        if 'blood_test' in request.data:
-            blood_test_serializer = BloodTestSerializer(data=request.data.pop('blood_test'))
-            if blood_test_serializer.is_valid():
-                blood_test = Blood_test(user=client, **blood_test_serializer.data)
-                blood_test.save()
+            if 'urine_test' in data:
+                urine_test_serializer = UrineTestSerializer(data=data.pop('urine_test'))
+                if urine_test_serializer.is_valid():
+                    urine_test = Urine_test(user=client, **urine_test_serializer.data)
+                    urine_test.save()
 
-                blood_sensor = 't'
+                    urine_device = 't'
+                else:
+                    return Response(urine_test_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             else:
-                return Response(blood_test_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            blood_sensor = 'f'
+                urine_device = 'f'
 
-        if 'urine_test' in request.data:
-            urine_test_serializer = UrineTestSerializer(data=request.data.pop('urine_test'))
-            if urine_test_serializer.is_valid():
-                urine_test = Urine_test(user=client, **urine_test_serializer.data)
-                urine_test.save()
+            Organization.objects.filter(device_id=device_id).update(
+                blood_sensor = blood_sensor,
+                urine_device = urine_device,
+                blood_strip = blood_strip,
+                urine_strip = urine_strip
+            )
 
-                urine_device = 't'
-            else:
-                return Response(urine_test_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            urine_device = 'f'
+            # created_at = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            created_at = datetime.datetime.now().date()
 
-        Organization.objects.filter(device_id=device_id).update(
-            blood_sensor = blood_sensor,
-            urine_device = urine_device,
-            blood_strip = blood_strip,
-            urine_strip = urine_strip
-        )
-
-        # created_at = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        created_at = datetime.datetime.now().date()
-
-        health = Health.objects.create(user=client, device=device, vital_sign=vital_sign, blood_test=blood_test, urine_test=urine_test,
-                                       created_at=created_at)
-        health.save()
+            health = Health.objects.create(user=client, device=device, vital_sign=vital_sign, blood_test=blood_test, urine_test=urine_test,
+                                           created_at=created_at)
+            health.save()
 
         return Response({"status": "Successfully updated health records!!!"}, status=status.HTTP_201_CREATED)
 
