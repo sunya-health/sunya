@@ -14,8 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clients
-        fields = ['user_id', 'device', 'first_name', 'last_name', 'email', 'address', 'contact_no', 'age', 'gender']
-
+        fields = ['user_id', 'device', 'first_name', 'last_name', 'dob', 'email', 'address', 'contact_no', 'age', 'gender']
 
 
 class VitalSignSerializer(serializers.ModelSerializer):

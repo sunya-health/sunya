@@ -32,13 +32,12 @@ class ClientReports(View):
         print("user_id: " + user_id)
         print("dob: " + dob)
 
-        client_exists = Clients.objects.filter(user_id=user_id).exists()
+        client_exists = Clients.objects.filter(user_id=user_id, dob=dob).exists()
         if not client_exists:
             return render(request, "health/index.html",
                           {'error': 1, 'error_message': 'Client does not exist!!!'})
 
         health_data = get_health_details(request, user_id)
-        print(health_data)
         return render(request, 'health/health_report.html', {'health_details': health_data})
 
 

@@ -27,9 +27,9 @@ class Organization_user(models.Model):
 
 class Clients(models.Model):
     user_id = models.CharField(max_length=255, unique=True)
-
     first_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)
+    dob = models.CharField(max_length=100, blank=True, null=True, default=None)
     email = models.EmailField(max_length=255, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     contact_no = models.CharField(max_length=20, blank=True, null=True)
