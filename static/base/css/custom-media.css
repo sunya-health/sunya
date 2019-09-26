@@ -1,4 +1,4 @@
-@media (max-width: 1440px) {
+@media (max-width: 1900px) {
     .setting-block ul {
         height: 175px;
     }
@@ -38,12 +38,12 @@
     }
 
     .d-user-info {
-        width: 70%;
-        margin-left: 30px;
+        width: 80%;
+        margin-left: 40px;
     }
     .d-health-info {
-        width: 40%;
-        margin-left: 30px;
+        width: 50%;
+        margin-left: 40px;
     }
 }
 
