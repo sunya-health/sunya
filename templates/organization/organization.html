@@ -162,16 +162,6 @@
                             <div class="form-group">
                                 <input id="contact" placeholder="Contact Number" name="contact" class="form-control" type="number">
                             </div>
-                            <div class="form-group">
-                                <input id="age" placeholder="Age" name="age" class="form-control" type="number">
-                            </div>
-                            <div class="form-group" id="gender">
-                                <label>Gender</label>
-                                <select id="gender_select" class="custom-select mr-sm-2" name="gender">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
                             <div class="form-group" style="display: none;">
                                 <input id="device_id" name="device_id" class="form-control" type="text">
                             </div>
@@ -297,7 +287,7 @@
             $(function () {
                 $("#users_select select").change(function () {
                     var selectedText = $(this).find("option:selected").text();
-                    var selectedValue = $(this).val();
+                    {#var selectedValue = $(this).val();#}
                     {#alert("Selected Text: " + selectedText + " Value: " + selectedValue);#}
                     if (selectedText === 'None'){
                         $("#username").removeAttr('disabled');
@@ -307,8 +297,6 @@
                         $("#email").removeAttr('disabled');
                         $("#address").removeAttr('disabled');
                         $("#contact").removeAttr('disabled');
-                        $("#gender_select").removeAttr('disabled');
-                        $("#age").removeAttr('disabled');
                     }else{
                         $("#username").attr('disabled', 'disabled');
                         $("#password").attr('disabled', 'disabled');
@@ -317,8 +305,6 @@
                         $("#email").attr('disabled', 'disabled');
                         $("#address").attr('disabled', 'disabled');
                         $("#contact").attr('disabled', 'disabled');
-                        $("#gender_select").attr('disabled', 'disabled');
-                        $("#age").attr('disabled', 'disabled');
                     }
                 });
             });

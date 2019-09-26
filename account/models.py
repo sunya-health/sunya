@@ -12,8 +12,6 @@ class User(models.Model):
     email = models.EmailField(max_length=255, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     contact_no = models.CharField(max_length=20, blank=True, null=True)
-    age = models.IntegerField(blank=True, null=True)
-    gender = models.CharField(max_length=6, blank=True, null=True)
     is_superuser = models.BooleanField(default=False)
     is_orguser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

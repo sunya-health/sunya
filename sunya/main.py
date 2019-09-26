@@ -76,12 +76,11 @@ class OrganizationDetails(View):
             return redirect('organization')
 
 
-def create_user(username, password, f_name, l_name, email, address, contact, age, gender):
+def create_user(username, password, f_name, l_name, email, address, contact):
     salt = get_salt()
     hashed_password = hash_string(salt, password)
     user = User(username=username, first_name=f_name, last_name=l_name, email=email,
-                salt=salt, hashed_password=hashed_password, address=address, contact_no=contact,
-                age=age, gender=gender, is_superuser=False, is_orguser=True)
+                salt=salt, hashed_password=hashed_password, address=address, contact_no=contact, is_superuser=False, is_orguser=True)
 
     user.save()
 
@@ -100,8 +99,6 @@ class AssignOrCreateUser(View):
             email = request.POST.get('email')
             address = request.POST.get('address')
             contact = request.POST.get('contact')
-            age = request.POST.get('age')
-            gender = request.POST.get('gender')
 
             device_exists = Organization_user.objects.filter(device=device_id).exists()
 
@@ -113,7 +110,7 @@ class AssignOrCreateUser(View):
                     if user_exists:
                         messages.error(request, 'User: %s already exists!!!' % username)
                     else:
-                        user = create_user(username, password, f_name, l_name, email, address, contact, age, gender)
+                        user = create_user(username, password, f_name, l_name, email, address, contact)
                         Organization_user.objects.create(user=user, device=device)
                         messages.success(request, 'Successfully Assigned User!!!')
                 else:
