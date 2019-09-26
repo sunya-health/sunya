@@ -135,6 +135,7 @@ class AssignOrCreateUser(View):
                 else:
                     user = create_user(username, password, f_name, l_name, email, address, contact)
                     Organization_user.objects.filter(device=device).update(user=user)
+                    User.objects.get(id=int(user_id)).delete()
                     messages.success(request, 'Successfully Assigned User!!!')
 
             return redirect('organization')
