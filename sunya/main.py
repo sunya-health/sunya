@@ -1,11 +1,11 @@
 import datetime
 
 from django.contrib import messages
-from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from rest_framework import generics, status
 # Create your views here.
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from account.models import User
@@ -301,4 +301,19 @@ class HealthList(generics.ListCreateAPIView):
 class HealthDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Health.objects.all()
     serializer_class = HealthSerializer
+
+
+@api_view(['GET'])
+def organization_device_details(request, pk):
+    device_id_exists = Organization.objects.filter(device_id=pk).exists()
+    if device_id_exists:
+        return Response({"status": 1}, status=status.HTTP_200_OK)
+    else:
+        return Response({"status": 0}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+
+
 

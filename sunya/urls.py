@@ -13,9 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include
+
 from sunya import main
 
 urlpatterns = [
@@ -24,6 +25,7 @@ urlpatterns = [
     url(r'^security/', include('security.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^$', main.MainPage.as_view(), name='main'),
+    url(r'^sunya/device/(?P<pk>[\w-]+)/$', main.organization_device_details, name='sunya_device'),
     url(r'^sunya/$', main.HealthList.as_view(), name='health_add'),
     url(r'^sunya/(?P<pk>[0-9]+)/$', main.HealthDetails.as_view(), name='health_get'),
     url(r'^sunya/report/$', main.ClientReports.as_view(), name='client_report'),
