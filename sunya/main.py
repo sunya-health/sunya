@@ -113,7 +113,7 @@ class AssignOrCreateUser(View):
             if not device_exists:
                 device = Organization.objects.get(device_id=device_id)
 
-                if users == 'None':
+                if users is None:
                     user_exists = User.objects.filter(username=username).exists()
                     if user_exists:
                         messages.error(request, 'User: %s already exists!!!' % username)
