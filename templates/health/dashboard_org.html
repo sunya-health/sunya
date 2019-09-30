@@ -36,6 +36,11 @@
                                 <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
                                     aria-sort="ascending"
                                     aria-label="Name: activate to sort column descending">
+                                    DOB
+                                </th>
+                                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
                                     First Name
                                 </th>
                                 <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
@@ -73,6 +78,7 @@
                             {% for data in health_data %}
                                 <tr>
                                     <td class="user_id">{{ data.user.user_id }}</td>
+                                    <td class="dob">{{ data.user.dob }}</td>
                                     <td class="first_name">{{ data.user.first_name }}</td>
                                     <td class="last_name">{{ data.user.last_name }}</td>
                                     <td class="address">{{ data.user.address }}</td>
@@ -93,6 +99,7 @@
                             <tfoot>
                             <tr>
                                 <th rowspan="1" colspan="1">User ID</th>
+                                <th rowspan="1" colspan="1">DOB</th>
                                 <th rowspan="1" colspan="1">First Name</th>
                                 <th rowspan="1" colspan="1">Last Name</th>
                                 <th rowspan="1" colspan="1">Address</th>
