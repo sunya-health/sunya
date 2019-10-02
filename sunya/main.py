@@ -298,7 +298,7 @@ def organization_device_details(request, pk):
         user_id = Clients.objects.filter(device_id=device_id).order_by('-user_id')[:1].get().user_id    # end user
         return Response({"status": 1, "device_id": device_id, "user_id": user_id}, status=status.HTTP_200_OK)
     else:
-        return Response({"status": 0}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"status": 0}, status=status.HTTP_400_BAD_REQUEST)
 
 
 
