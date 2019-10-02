@@ -180,37 +180,17 @@ class HealthList(generics.ListCreateAPIView):
                 device = Organization.objects.filter(device_id=device_id)
 
                 if not device:
-                    error = {
-                        "device": [
-                            "Object with device_id=%s does not exist." % device_id
-                        ]
-                    }
-                    return Response({"status": 0, "msg": error}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({"status": 0, "msg": "Object with device_id=%s does not exist." % device_id}, status=status.HTTP_400_BAD_REQUEST)
 
                 blood_strip = device.get().blood_strip
                 urine_strip = device.get().urine_strip
 
                 if blood_strip == 0 and urine_strip == 0:
-                    error = {
-                        "strip": [
-                            "Blood strip and Urine strip not available"
-                        ]
-                    }
-                    return Response({"status": 0, "msg": error}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({"status": 0, "msg": "Blood strip and Urine strip not available"}, status=status.HTTP_400_BAD_REQUEST)
                 elif blood_strip == 0:
-                    error = {
-                        "strip": [
-                            "Blood strip not available"
-                        ]
-                    }
-                    return Response({"status": 0, "msg": error}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({"status": 0, "msg": "Blood strip not available"}, status=status.HTTP_400_BAD_REQUEST)
                 if urine_strip == 0:
-                    error = {
-                        "strip": [
-                            "Urine strip and Urine strip not available"
-                        ]
-                    }
-                    return Response({"status": 0, "msg": error}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({"status": 0, "msg": "Urine strip not available"}, status=status.HTTP_400_BAD_REQUEST)
 
                 blood_strip = blood_strip - 1
                 urine_strip = urine_strip - 1
@@ -227,7 +207,7 @@ class HealthList(generics.ListCreateAPIView):
                         client = Clients(device=device, **client_details)
                         client.save()
                     else:
-                        return Response({"status": 0, "msg": client_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+                        return Response({"status": 0, "msg": client_serializer.error_messages}, status=status.HTTP_400_BAD_REQUEST)
 
                 if 'vital_sign' in data:
                     vital_sign_serializer = VitalSignSerializer(data=data.pop('vital_sign'))
@@ -252,7 +232,7 @@ class HealthList(generics.ListCreateAPIView):
                         vital_sign = Vital_sign(user=client, **v_data)
                         vital_sign.save()
                     else:
-                        return Response({"status": 0, "msg": vital_sign_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+                        return Response({"status": 0, "msg": vital_sign_serializer.error_messages}, status=status.HTTP_400_BAD_REQUEST)
 
                 if 'blood_test' in data:
                     blood_test_serializer = BloodTestSerializer(data=data.pop('blood_test'))
@@ -262,7 +242,7 @@ class HealthList(generics.ListCreateAPIView):
 
                         blood_sensor = 't'
                     else:
-                        return Response({"status": 0, "msg": blood_test_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+                        return Response({"status": 0, "msg": blood_test_serializer.error_messages}, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     blood_sensor = 'f'
 
@@ -274,7 +254,7 @@ class HealthList(generics.ListCreateAPIView):
 
                         urine_device = 't'
                     else:
-                        return Response({"status": 0, "msg": urine_test_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+                        return Response({"status": 0, "msg": urine_test_serializer.error_messages}, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     urine_device = 'f'
 
@@ -318,7 +298,7 @@ def organization_device_details(request, pk):
         user_id = Clients.objects.filter(device_id=device_id).order_by('-user_id')[:1].get().user_id    # end user
         return Response({"status": 1, "device_id": device_id, "user_id": user_id}, status=status.HTTP_200_OK)
     else:
-        return Response({"status": 0}, status=status.HTTP_200_OK)
+        return Response({"status": 0}, status=status.HTTP_204_NO_CONTENT)
 
 
 
