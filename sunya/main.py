@@ -295,7 +295,10 @@ def organization_device_details(request, pk):
     imei_exists = Organization.objects.filter(imei=pk).exists()
     if imei_exists:
         device_id = Organization.objects.filter(imei=pk).get().device_id
-        user_id = Clients.objects.filter(device_id=device_id).order_by('-user_id')[:1].get().user_id    # end user
+        if Clients.objects.filter(device_id=device_id).exists():
+            user_id = Clients.objects.filter(device_id=device_id).order_by('-user_id')[:1].get().user_id    # end user
+        else:
+            user_id = None
         return Response({"status": 1, "device_id": device_id, "user_id": user_id}, status=status.HTTP_200_OK)
     else:
         return Response({"status": 0}, status=status.HTTP_200_OK)
