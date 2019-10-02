@@ -17,6 +17,11 @@
                                 <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
                                     aria-sort="ascending"
                                     aria-label="Name: activate to sort column descending">
+                                    IMEI
+                                </th>
+                                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
                                     Device ID
                                 </th>
                                 <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
@@ -51,6 +56,7 @@
                             <tbody>
                             {% for data in org_user %}
                                 <tr>
+                                    <td class="username">{{ data.imei }}</td>
                                     <td class="username">{{ data.device_id }}</td>
                                     <td class="username">{{ data.username }}</td>
                                     <td class="first_name">{{ data.first_name }}</td>
@@ -63,6 +69,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
+                                <th rowspan="1" colspan="1">IMEI</th>
                                 <th rowspan="1" colspan="1">Device ID</th>
                                 <th rowspan="1" colspan="1">Username</th>
                                 <th rowspan="1" colspan="1">First Name</th>
@@ -89,38 +96,6 @@
                 "bFilter": true
             } );
         } );
-    </script>
-
-    <script>
-        $(document).ready(function(){
-            $("#clientDetailsForm").submit(function(evt){
-                evt.preventDefault();
-
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: "{% url 'client_report' %}",
-                    data : {
-                        'user_id': 'bibek',
-                        'csrfmiddlewaretoken': '{{ csrf_token }}'
-                    },
-                    success: function(data){
-                        if(data.success){
-                            console.log("success");
-                            $('#healthModal').modal('show');
-                            document.getElementById("clientDetailsForm").reset();
-                            $('#clientDetails').modal('hide');
-
-                        }else{
-                            console.log("not success")
-                        }
-                    },
-                    error: function(xhr, desc, err){
-                        console.log(err);
-                    }
-                });
-            });
-        });
     </script>
 
 {% endblock %}

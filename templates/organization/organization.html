@@ -18,6 +18,11 @@
                                 <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
                                     aria-sort="ascending"
                                     aria-label="Name: activate to sort column descending">
+                                    IMEI
+                                </th>
+                                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
+                                    aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
                                     Device ID
                                 </th>
                                 <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 320px;"
@@ -42,6 +47,7 @@
                             <tbody>
                             {% for data in organization %}
                                 <tr>
+                                    <td class="device_id">{{ data.imei }}</td>
                                     <td class="device_id">{{ data.device_id }}</td>
                                     <td class="name">{{ data.name }}</td>
                                     <td class="address">{{ data.address }}</td>
@@ -66,6 +72,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
+                                <th rowspan="1" colspan="1">IMEI</th>
                                 <th rowspan="1" colspan="1">Device ID</th>
                                 <th rowspan="1" colspan="1">Name</th>
                                 <th rowspan="1" colspan="1">Address</th>
@@ -92,6 +99,10 @@
                     <div class="modal-body">
                         <form action="/sunya/organization/" method="post">
                             {% csrf_token %}
+                            <div class="form-group">
+                                <label for="imei">IMEI</label>
+                                <input name="imei" class="form-control" type="text" required="required">
+                            </div>
                             <div class="form-group">
                                 <label for="device_id">Device ID</label>
                                 <input name="device_id" class="form-control" type="text" required="required">

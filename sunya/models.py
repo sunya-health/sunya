@@ -4,6 +4,7 @@ from account.models import User
 
 
 class Organization(models.Model):
+    imei = models.CharField(max_length=100, unique=True)
     device_id = models.CharField(max_length=150, unique=True)
     address = models.CharField(max_length=50)
     name = models.CharField(max_length=100)

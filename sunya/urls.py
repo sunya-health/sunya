@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^security/', include('security.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^$', main.MainPage.as_view(), name='main'),
-    url(r'^sunya/device/(?P<pk>[\w-]+)/$', main.organization_device_details, name='sunya_device'),
+    url(r'^sunya/imei/(?P<pk>[\w-]+)/$', main.organization_device_details, name='sunya_device'),
     url(r'^sunya/$', main.HealthList.as_view(), name='health_add'),
     url(r'^sunya/(?P<pk>[0-9]+)/$', main.HealthDetails.as_view(), name='health_get'),
     url(r'^sunya/report/$', main.ClientReports.as_view(), name='client_report'),

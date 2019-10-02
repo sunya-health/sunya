@@ -73,13 +73,20 @@ class OrganizationDetails(View):
 
     def post(self, request):
         if request.method == 'POST':
+            imei = request.POST.get('imei')
             device_id = request.POST.get('device_id')
             name = request.POST.get('name')
             address = request.POST.get('address')
             blood_strip = request.POST.get('blood_strip')
             urine_strip = request.POST.get('urine_strip')
 
-            Organization.objects.create(device_id=device_id, name=name, address=address, blood_strip=blood_strip, urine_strip=urine_strip)
+            if Organization.objects.filter(imei=imei).exists():
+                messages.error(request, "IMEI: %s already registered." % imei)
+            elif Organization.objects.filter(device_id=device_id):
+                messages.error(request, "Device ID: %s already registered" % device_id)
+
+            Organization.objects.create(imei=imei, device_id=device_id, name=name, address=address, blood_strip=blood_strip,
+                                        urine_strip=urine_strip)
 
             return redirect('organization')
 
@@ -305,9 +312,11 @@ class HealthDetails(generics.RetrieveUpdateDestroyAPIView):
 
 @api_view(['GET'])
 def organization_device_details(request, pk):
-    device_id_exists = Organization.objects.filter(device_id=pk).exists()
-    if device_id_exists:
-        return Response({"status": 1}, status=status.HTTP_200_OK)
+    imei_exists = Organization.objects.filter(imei=pk).exists()
+    if imei_exists:
+        device_id = Organization.objects.filter(imei=pk).get().device_id
+        user_id = Clients.objects.filter(device_id=device_id).order_by('-user_id')[:1].get().user_id    # end user
+        return Response({"status": 1, "device_id": device_id, "user_id": user_id}, status=status.HTTP_200_OK)
     else:
         return Response({"status": 0}, status=status.HTTP_204_NO_CONTENT)
 

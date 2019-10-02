@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import View
 
 from account.models import User
-from sunya.models import Health, Organization_user, Clients, Vital_sign, Blood_test, Urine_test
+from sunya.models import Health, Organization_user, Clients, Vital_sign, Blood_test, Urine_test, Organization
 from . import context_processors
 
 
@@ -83,6 +83,7 @@ def get_organization_user_details():
     for organization_user in organization_user_details:
         device_id = organization_user['device_id']
         user = User.objects.filter(id=organization_user['user_id']).values()[0]
+        user['imei'] = Organization.objects.filter(device_id=device_id).get().imei
         user['device_id'] = device_id
         organization_user_list.append(user)
 
