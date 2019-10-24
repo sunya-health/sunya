@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib import messages
+from django.db.models import Max
 from django.shortcuts import render, redirect
 from django.views import View
 from rest_framework import generics, status
@@ -84,6 +85,12 @@ class OrganizationDetails(View):
                 messages.error(request, "IMEI: %s already registered." % imei)
             elif Organization.objects.filter(device_id=device_id):
                 messages.error(request, "Device ID: %s already registered" % device_id)
+
+            if Organization.objects.all().count() == 0:
+                device_id = format(1, '04')
+            else:
+                latest_device_id = Organization.objects.all().aggregate(latest_device_id=Max('device_id'))['latest_device_id']
+                device_id = format((int(latest_device_id) + 1), '04')
 
             Organization.objects.create(imei=imei, device_id=device_id, name=name, address=address, blood_strip=blood_strip,
                                         urine_strip=urine_strip)
