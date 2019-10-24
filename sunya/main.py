@@ -75,7 +75,7 @@ class OrganizationDetails(View):
     def post(self, request):
         if request.method == 'POST':
             imei = request.POST.get('imei')
-            device_id = request.POST.get('device_id')
+            # device_id = request.POST.get('device_id')
             name = request.POST.get('name')
             address = request.POST.get('address')
             blood_strip = request.POST.get('blood_strip')
@@ -83,8 +83,9 @@ class OrganizationDetails(View):
 
             if Organization.objects.filter(imei=imei).exists():
                 messages.error(request, "IMEI: %s already registered." % imei)
-            elif Organization.objects.filter(device_id=device_id):
-                messages.error(request, "Device ID: %s already registered" % device_id)
+
+            # elif Organization.objects.filter(device_id=device_id):
+            #     messages.error(request, "Device ID: %s already registered" % device_id)
 
             if Organization.objects.all().count() == 0:
                 device_id = format(1, '04')
